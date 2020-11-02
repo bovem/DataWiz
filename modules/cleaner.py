@@ -14,7 +14,7 @@ class Cleaner():
                 print("Created Variable name: {}".format(new_var_name))
             else:
                 var["data"].dropna(inplace=True)
-            print()
+            #print()
             print("Size after dropping nulls: {}".format(var["data"].shape))
     
     def mapper(self, var_name, col_name="", maping={}, new_var=False, new_var_name=""):
@@ -75,3 +75,16 @@ class Cleaner():
                 var["data"].fillna(var["data"].fillna("bfill"), inplace=True)
             #print()
             #print("Size after dropping nulls: {}".format(var["data"].shape))
+    
+    def joiner(self, var_name, var_name2, new_var=False, new_var_name=""):
+        if (check_for_df(self.vardict, var_name) and check_for_df(self.vardict, var_name)):
+            var = find_in_vardict(self.vardict, var_name)
+            var2 = find_in_vardict(self.vardict, var_name2)
+            if new_var:
+                self.vardict.add(var["data"].join(var2["data"], lsuffix="_{}".format(var_name), 
+                rsuffix="_{}".format(var_name2)), new_var_name)
+                print("Created Variable name: {}".format(new_var_name))
+            else:
+                var["data"] = var["data"].join(var2["data"], lsuffix="_{}".format(var_name),
+                 rsuffix="_{}".format(var_name2))
+            
