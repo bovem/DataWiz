@@ -88,18 +88,29 @@ class Cleaner():
                 var["data"] = var["data"].join(var2["data"], lsuffix="_{}".format(var_name),
                  rsuffix="_{}".format(var_name2))
 
-    """
+    
     def merger(self, var_name_list, new_var=False, new_var_name=""):
+        def multimerge(dflist, suffixlist):
+            temp_df = dflist[0]
+            temp_df.columns = ["{}_{}".format(t, suffixlist[0]) for t in temp_df.columns]
+            
+            for l, s in zip(dflist[1:], suffixlist[1:]):
+                l.columns = ["{}_{}".format(t, s) for t in l.columns]
+                temp_df = temp_df.join(l)
+            return temp_df
+
         flag = 0
         for var_name in var_name_list:
-            if ~(check_for_df(self.vardict, var_name)):
+            if not (check_for_df(self.vardict, var_name)):
+                #print(not (check_for_df(self.vardict, var_name)))
+                print("{} is Empty Dataframe".format(var_name))
                 flag=1
         if flag == 0:
-            dfs = [find_in_vardict(self.vardict, v) for v in var_name_list]
+            dfs = [find_in_vardict(self.vardict, v)["data"] for v in var_name_list]
             suffixes = ["_{}".format(v) for v in var_name_list]
             if new_var:
-                self.vardict.add(pd.merge(dfs, suffixes=suffixes), new_var_name)
+                self.vardict.add(multimerge(dfs, suffixes), new_var_name)
                 print("Created Variable name: {}".format(new_var_name))
             else:
-                var["data"] = pd.merge(dfs, suffixes=suffixes)  
-    """      
+                var["data"] = multimerge(dfs, suffixes)  
+          
