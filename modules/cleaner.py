@@ -87,4 +87,19 @@ class Cleaner():
             else:
                 var["data"] = var["data"].join(var2["data"], lsuffix="_{}".format(var_name),
                  rsuffix="_{}".format(var_name2))
-            
+
+    """
+    def merger(self, var_name_list, new_var=False, new_var_name=""):
+        flag = 0
+        for var_name in var_name_list:
+            if ~(check_for_df(self.vardict, var_name)):
+                flag=1
+        if flag == 0:
+            dfs = [find_in_vardict(self.vardict, v) for v in var_name_list]
+            suffixes = ["_{}".format(v) for v in var_name_list]
+            if new_var:
+                self.vardict.add(pd.merge(dfs, suffixes=suffixes), new_var_name)
+                print("Created Variable name: {}".format(new_var_name))
+            else:
+                var["data"] = pd.merge(dfs, suffixes=suffixes)  
+    """      

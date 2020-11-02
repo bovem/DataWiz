@@ -1,5 +1,6 @@
 import pandas as pd
 from utils import find_in_vardict
+
 class VarDict():
     def __init__(self):
         self.var_dict = []
