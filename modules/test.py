@@ -3,6 +3,7 @@ from cleaner import Cleaner
 from processor import Processor
 import warnings
 warnings.filterwarnings("ignore")
+
 l = Loader()
 l.load("limestone_2020.csv", "limestone")
 l.load("iron.csv", "iron")
@@ -14,7 +15,8 @@ c.remove_null("limestone")
 #c.fill_backward("limestone", new_var=True, new_var_name="some_var")
 #c.joiner("limestone", "iron")
 p = Processor(c.vardict)
-p.normalize("mbs", new_var=True, new_var_name="mbs_scaled")
+#p.normalize("mbs", new_var=True, new_var_name="mbs_scaled")
+p.onehotencoder("mbs", "trade_flow_desc", new_var=True, new_var_name="mbs_encoded")
 #print(p.vardict.show_data("mbs_scaled").info())
-print(p.vardict.show_data("mbs_scaled"))
+print(p.vardict.show_data("mbs_encoded"))
 

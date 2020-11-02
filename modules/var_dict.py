@@ -13,3 +13,6 @@ class VarDict():
     
     def show_data(self, var_name):
         return(find_in_vardict(self, var_name)["data"])
+    
+    def move_empty(self, var_name):
+        self.add(find_in_vardict(self, "_")["data"], var_name)
