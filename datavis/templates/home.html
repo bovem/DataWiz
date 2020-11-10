@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block  content %}
+<!-- <h1>Data {{ name }}</h1> -->
+
+
+
+<div class="cell m-2">
+    <div class="row m-2">
+        <div class="col-md-12">
+            <h5>Data Source</h5>
+            <div class="row">
+                <div class="col-4">
+                    <form action="/upload" method="POST" class="dropzone dz mx-auto" style="width: 100%; ">
+                        {% csrf_token %}
+                        <div class="fallback">
+                            <input name="file" type="file" multiple />
+                        </div>
+                    </form>
+                </div>
+                <div class="col-7">
+                    <form action="">
+                        {% csrf_token %}
+                        <div class="row ">
+                            <div class="col-6 ">
+                                <div class="form-group row">
+                                    <label for="file-type" class="col-sm-4">File type</label>
+                                    <select class="form-control col-sm-6" id="exampleFormControlSelect1">
+                                        <option>CSV</option>
+                                        <option>SQLite</option>
+                                        <option>xlsx</option>
+                                    </select>
+                                </div>
+                                <input class="form-control" type="text" name="variable" placeholder="Variable Name">
+                            </div>
+                            <div class="col-md-4 offset-md-2">
+                                <input class="form-control" type="text" name="encoding" placeholder="Encoding">
+                            </div>
+                            <button type="submit" style="position: absolute; right: 1px; bottom: 1px"
+                                class="btn btn-primary btn-lg">LOAD</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            style="position: absolute; bottom: 0px; right:0px;">
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/cleaner">Cleaner</a>
+            <a class="dropdown-item" href="#">Transformer</a>
+            <a class="dropdown-item" href="#">Visualiser</a>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="cell m-2 ">
+    <div class="row m-2">
+        <div class="col-md-12 ">
+
+            <form action="/table" method="GET" style="display: inline;">
+                {% csrf_token %}
+                <label for="file">Choose File: </label>
+                <select name="file" id="">
+                    {% for file in files %}
+                    <option value="{{ file }}">{{ file }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Show Table</button>
+            </form>
+
+            <form action="/cols" method="GET" style="display: inline; float: right">
+                {% csrf_token %}
+                <button type="submit">GET COLUMNS</button>
+                {{ cols }}
+            </form>
+
+        </div>
+    </div>
+
+    <!-- <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            style="position: absolute; bottom: 0px; right:0px;">
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/cleaner">Cleaner</a>
+            <a class="dropdown-item" href="#">Transformer</a>
+            <a class="dropdown-item" href="#">Visualiser</a>
+        </div>
+    </div> -->
+
+</div>
+
+<div class="cell m-2 ">
+    <div class="row m-2">
+        <div class="col-md-12">
+            <h5>Cleaner</h5>
+            <div class="row">
+                <div class="col-10 ">
+                    <form action="" class="form">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label for="file-type" class="col-sm-3">Cleaner</label>
+                            <select class="form-control col-sm-4" id="extension">
+                                <option>Remove Null value</option>
+                                <option>Fill Forward</option>
+                                <option>Fill Mean</option>
+                                <option>Fill Backward</option>
+                                <option>Fill Median </option>
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label for="var-name" class="col-sm-3"> Variable Name </label>
+                            <input class="form-control col-sm-4" type="text" name="variable" placeholder="Variable Name">
+                        </div>
+                        <div class="form-group row">
+                            <label for="new-var-name" class="col-sm-3">New Variable Name</label>
+                            <input class="form-control col-sm-4" type="text" name="encoding" placeholder="Enter New Variable Name">
+                        </div>
+                        
+                        
+                        <button type="submit" style="position: absolute; right: 1px; bottom: 1px" class="btn btn-primary btn-lg">APPLY OPERATION</button>
+
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+            style="position: absolute; bottom: 0px; right:0px;">
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/cleaner">Cleaner</a>
+            <a class="dropdown-item" href="#">Transformer</a>
+            <a class="dropdown-item" href="#">Visualiser</a>
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}

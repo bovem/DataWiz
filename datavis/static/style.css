@@ -1,0 +1,18 @@
+body {
+    background-color: #f8f8f8;
+}
+
+.dz {
+    border: dashed !important;
+    border-color: #ccc;
+    border-radius: 10px !important;
+}
+
+.dz:hover {
+    background-color: aliceblue !important;
+}
+
+.cell {
+    border-style: solid !important;
+    border-color: black !important;
+}
