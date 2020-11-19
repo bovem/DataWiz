@@ -1,0 +1,47 @@
+<div class="cell m-2 outer-cell">
+    <div class="row m-2">
+        <div class="col-md-12">
+            <h5>Data Transformation</h5>
+            <div class="row">
+                <div class="col-8 ">
+                    <form action="" class="form">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label for="clean-operation" class="col-sm-3">Transformation</label>
+                            <select class="form-control col-sm-4" id="extension">
+                                <option>One Hot Encoding</option>
+                                <option>Normalizer</option>
+                                <option>Standardizer</option>
+                                <!-- <option>Fill Backward</option>
+                                <option>Fill Median </option> -->
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label for="var-name" class="col-sm-3"> Variable Name </label>
+                            <input class="form-control col-sm-4" type="text" name="variable"
+                                placeholder="Variable Name">
+                        </div>
+                        <div class="form-group row">
+                            <label for="new-var-name" class="col-sm-3">New Variable Name</label>
+                            <input class="form-control col-sm-4" type="text" name="encoding"
+                                placeholder="Enter New Variable Name">
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="col-name" class="col-sm-3">Column Name</label>
+                            <input class="form-control col-sm-4" type="text" name="encoding" placeholder="Column to perform operation">
+                        </div>
+
+
+                        <button type="submit" style="position: absolute; right: 1px; bottom: 1px"
+                            class="btn btn-light btn-lg">APPLY OPERATION</button>
+
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

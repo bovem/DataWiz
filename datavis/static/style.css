@@ -15,4 +15,19 @@ body {
 .cell {
     border-style: solid !important;
     border-color: black !important;
+    border-width: 1px !important;
+}
+
+.outer-cell {
+    background-color:#868484;
+    color: white;
+}
+
+.btn-dark {
+    background-color: #393939;
+}
+
+.icon {
+    color: gray !important; 
+    font-size:22px !important;
 }
