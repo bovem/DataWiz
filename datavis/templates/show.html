@@ -16,11 +16,11 @@
                 <div class=" row" style="color: white; font-size: 16px; ">
                     <div class="col-md-12 mt-1">
                         <div class="form-group">
-                            <label for="varname" >Variable</label>
-                            <select class="form-control" style="background-color: #c4c4c4" name="varname">
-                                <option>var 1</option>
-                                <option>Variable 2</option>
-                                <option>Var 3</option>
+                            <label for="Variable" >Choose Variable: </label>
+                            <select name="variable" id="" style="background-color: #c4c4c4;">
+                                {% for var in varlist %}
+                                <option value="{{ var }}">{{ var }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>

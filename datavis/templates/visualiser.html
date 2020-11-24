@@ -6,21 +6,23 @@
     </div>
 
     <div class="row m-2">
-        <div class="col-md-7 mt-3 cell" style="height: 350px; background-color: white">
+        <div class="col-md-8 mt-3 cell" style="height: 350px; background-color: white">
             {% include 'graph.html' %}
         </div>
 
-        <div class="vis-input col-md-5" style="position: relative; top :30px">
+        <div class="vis-input col-md-4" style="position: relative; top :30px">
             <form action="">
                 {% csrf_token %}
                 <div class=" row" style="color: white; font-size: 16px; ">
-                    <div class="col-md-10 mt-1">
-                        <label for="varname" class="mr-2 ">Variable</label>
-                        <select class="mx-2" style="background-color: #c4c4c4" >
-                            <option>Var 1</option>
-                            <option>Variable 2</option>
-                            <option>Var 3</option>
-                        </select>
+                    <div class="col-md-12 mt-1">
+                        <div class="form-group row">
+                            <label for="Variable" class="col-sm-6">Choose Variable: </label>
+                            <select name="variable" id="" class=" col-sm-5" style="background-color: #c4c4c4;">
+                                {% for var in varlist %}
+                                <option value="{{ var }}">{{ var }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
                     <div class="col-md-12 mt-1">
                         <div class=" form-group row">
@@ -40,24 +42,16 @@
                             <input type="text" class="mx-2 col-sm-6" name="ylabel" style="background-color: #c4c4c4">
                         </div>
                     </div>
-                    <div class="col-md-6 mt-1">
+                    <div class="col-md-12 mt-1">
                         <div class="form-group row">
-                            <label for="col-x" class="col-md-4">X Axis</label>
-                            <select class="col-md-8" style="background-color: #c4c4c4" name="col-x">
-                                <option>col 1</option>
-                                <option>Column 2</option>
-                                <option>Var 3</option>
-                            </select>
+                            <label for="col-x" class="mx-2 col-md-3">X Axis</label>
+                            <input type="text" class=" mx-2 col-sm-6" name="ylabel" style="background-color: #c4c4c4">
                         </div>
                     </div>
-                    <div class="col-md-6 mt-1">
+                    <div class="col-md-12 mt-1">
                         <div class="form-group row">
-                            <label for="col-y" class="col-md-4">Y Axis</label>
-                            <select class="col-md-8" style="background-color: #c4c4c4" name="col-y">
-                                <option>col 1</option>
-                                <option>Column 2</option>
-                                <option>Var 3</option>
-                            </select>
+                            <label for="col-y" class="mx-2 col-md-3">Y Axis</label>
+                            <input type="text" class="mx-2 col-sm-6" name="ylabel" style="background-color: #c4c4c4">
                         </div>
                     </div>
                 </div>

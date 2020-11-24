@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse,JsonResponse
+from django.http import HttpResponse, JsonResponse
 from .models import Data
-import csv 
+import csv
 import os
-from .utils import save_file, dump_to_pkl, load_pkl, find_in_vardict, addCell
+from .utils import *
 from .loader import Loader
 import json
+# from .var_dict import VarDict
 
 def home(request):
     path = "./media/"
@@ -18,18 +19,18 @@ def home(request):
     out = [row for row in reader]
     infile.close()
 
-
     opList = []
-    json_file =  open('./calc/json_dumps/oplist.json', 'r')
+    json_file = open('./calc/json_dumps/oplist.json', 'r')
     opList = json.load(json_file)
     json_file.close()
-    print('aa' , opList)
+    print('aa', opList)
 
     if len(opList) == 0:
         opList = []
 
+    media_files = getMediaFiles()
     # if request.method == 'POST':
-        
+
     #     print(opList)
 
     #     new_op = request.body
@@ -41,31 +42,68 @@ def home(request):
     #         opList.append(new_op)
     #     else:
     #         opList = [new_op]
-        
+
     #     with open('./calc/json_dumps/oplist.json','w') as json_file:
     #         json.dump(opList, json_file)
 
     #     print(opList)
     #     # return render(request, 'home.html', context={'files': lst, 'oplist': opList, 'data' :out , 'headers' : headers })
-        
+
     #     return JsonResponse({'data' : 'success'})
 
+    # context = load_pkl('context')
+    vardict = load_pkl('vardict')
+    if vardict != None:
+        varList = vardict.get_variables()
+    else:
+        varList = []
+    context = {
+        'files': media_files,
+        'oplist': opList,
+        'data': out,
+        'headers': headers,
+        'varlist': varList
+    }
+
+    dump_to_pkl(context, 'context')
     
-    
-        # return render(request, 'home.html', {'files': lst, 'oplist': opList, 'data' :out , 'headers' : headers })
-    return render(request, 'home.html', context={'files': lst, 'oplist': opList, 'data' :out , 'headers' : headers })
+    # return render(request, 'home.html', {'files': lst, 'oplist': opList, 'data' :out , 'headers' : headers })
+    return render(request, 'home.html',context= context )
+
+
+def load_df(request):
+    vardict = load_pkl('vardict')
+    if vardict == None:
+        l = Loader()
+    else:
+        l = Loader(vardict)
+    if request.method == 'POST':
+        filename = request.POST.get('filename')
+        filetype = request.POST.get('filetype')
+        varName = request.POST.get('variable')
+        encoding = request.POST.get('encoding')
+
+        l.load('./media/'+filename, varName)
+        dump_to_pkl(l.vardict, 'vardict')
+
+        context = load_pkl('context')
+        context['loaderMsg'] = "File successfully loaded"
+        return render(request, 'home.html', context=context)
 
 
 def file_upload(request):
-    l = Loader()
+    # l = Loader()
     if request.method == 'POST':
         uploaded_file = request.FILES.get('file')
         save_file(uploaded_file)
-        # Data.objects.create(upload = my_file)
-        l.load('./media/' + uploaded_file.name, uploaded_file.name.split('.')[0])
-        # print(l.vardict.var_dict)
-        dump_to_pkl(l, uploaded_file.name)
+        
+        context = load_pkl('context')
+        context['files'] = getMediaFiles()
+        print(context['files'])
+        # context['loaderMsg'] = "File successfully loaded"
+        render(request, 'home.html', context=context)
     return HttpResponse('uploaded')
+
 
 def get_columns(request):
     obj = load_dump()
@@ -75,10 +113,6 @@ def get_columns(request):
     col_list = df.columns
     return HttpResponse(col_list)
 
-def get_files(request):
-    path = "./media/"
-    lst = os.listdir(path)
-    render_to_response('home.html', {'files': lst})
 
 def show_table(request):
     filename = request.GET.get('file')
@@ -86,21 +120,24 @@ def show_table(request):
     reader = csv.DictReader(infile)
     headers = [col for col in reader.fieldnames]
     out = [row for row in reader]
-    return render(request, 'table.html', {'data' :out , 'headers' : headers})
+    return render(request, 'table.html', {'data': out, 'headers': headers})
 
 
-def addCleaner(request): 
+def addCleaner(request):
     addCell('cleaner')
     return redirect('/')
 
-def addVisualizer(request): 
+
+def addVisualizer(request):
     addCell('visualiser')
     return redirect('/')
+
 
 def addViewer(request):
     addCell('show')
     return redirect('/')
 
+
 def addTransformer(request):
     addCell('transformer')
-    return redirect('/')    
+    return redirect('/')

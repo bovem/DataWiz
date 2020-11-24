@@ -1,6 +1,9 @@
 import pandas as pd
 import pickle
 import json
+import os
+# from .var_dict import VarDict
+
 def find_in_vardict(vardict, name):
     for x in vardict.var_dict:
         if x["variable_name"] == name:
@@ -20,16 +23,19 @@ def save_file(f):
         for chunk in f.chunks():
             destination.write(chunk)
 
-def dump_to_pkl(var_dict, filename):
-    filename = filename.split('.')[0]
-    out_file = open('./calc/json_dumps/pkl_file', 'wb')
-    pickle.dump(var_dict, out_file)
+def dump_to_pkl(obj, filename):
+    out_file = open('./calc/json_dumps/'+filename, 'wb')
+    pickle.dump(obj, out_file)
     out_file.close()
 
-def load_pkl():
-    infile = open('./calc/json_dumps/pkl_file', 'rb')
-    obj = pickle.load(infile, encoding = 'bytes')
-    infile.close()
+def load_pkl(filename):
+    try:
+        with open('./calc/json_dumps/' + filename, 'rb') as infile:
+            obj = pickle.load(infile, encoding = 'bytes')
+    except EOFError as e:
+        obj = None
+
+    
     return obj
 
 
@@ -48,6 +54,12 @@ def addCell(cellName):
         json.dump(opList, json_file)
 
 
+
+
+def getMediaFiles():
+    path = "./media/"
+    lst = os.listdir(path)
+    return lst
 
 
 # cant load pickle file if saved according to name

@@ -19,25 +19,35 @@
                     </form>
                 </div>
                 <div class="col-7">
-                    <form action="">
+                    <form action="/loader" method="POST">
                         {% csrf_token %}
                         <div class="row ">
                             <div class="col-6 ">
                                 <div class="form-group row">
                                     <label for="file-type" class="col-sm-4">File type</label>
-                                    <select class="form-control col-sm-6" id="exampleFormControlSelect1">
+                                    <select class="form-control col-sm-6" name="filetype">
                                         <option>CSV</option>
                                         <option>SQLite</option>
                                         <option>xlsx</option>
                                     </select>
                                 </div>
+                                
                                 <input class="form-control" type="text" name="variable" placeholder="Variable Name">
+                                <div class="form-group mt-2">
+                                    <label for="file">Choose File: </label>
+                                    <select name="filename" id="">
+                                        {% for file in files %}
+                                        <option value="{{ file }}">{{ file }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-md-4 offset-md-2">
                                 <input class="form-control" type="text" name="encoding" placeholder="Encoding">
                             </div>
                             <button type="submit" style="position: absolute; right: 1px; bottom: 1px"
-                                class="btn btn-primary btn-lg">LOAD</button>
+                                class="btn btn-secondary btn-lg">Load Dataframe</button>
+                            <h4 style="color: green;">{{ loaderMsg }}</h4>
                         </div>
                     </form>
                 </div>
@@ -51,7 +61,7 @@
 
 
 
-<div class="cell m-2 " >
+<div class="cell m-2 ">
     <div class="row m-2">
         <div class="col-md-12 ">
 

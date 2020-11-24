@@ -3,7 +3,8 @@ import pandas as pd
 from sklearn import preprocessing
 le = preprocessing.LabelEncoder()
 
-
+from .loader import Loader
+from utils import .
 
 def get_columns(request):
     df = pd.read_csv('../media/file.csv')
@@ -26,3 +27,8 @@ def convertCategorical(col_list):
         df[col] = le.transform(df[col])
     
     print(df.head())
+
+l = Loader()
+l.load("iron.csv", "abc")
+dump_to_pkl()
+

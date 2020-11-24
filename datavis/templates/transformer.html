@@ -17,9 +17,12 @@
                             </select>
                         </div>
                         <div class="form-group row">
-                            <label for="var-name" class="col-sm-3"> Variable Name </label>
-                            <input class="form-control col-sm-4" type="text" name="variable"
-                                placeholder="Variable Name">
+                            <label for="Variable" class="col-sm-3">Choose Variable: </label>
+                            <select name="variable" id="" class="form-control col-sm-4">
+                                {% for var in varlist %}
+                                <option value="{{ var }}">{{ var }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
                         <div class="form-group row">
                             <label for="new-var-name" class="col-sm-3">New Variable Name</label>
