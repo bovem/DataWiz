@@ -23,7 +23,6 @@ def home(request):
     json_file = open('./calc/json_dumps/oplist.json', 'r')
     opList = json.load(json_file)
     json_file.close()
-    print('aa', opList)
 
     if len(opList) == 0:
         opList = []
@@ -64,6 +63,7 @@ def home(request):
         'headers': headers,
         'varlist': varList
     }
+    print(opList)
 
     dump_to_pkl(context, 'context')
     
@@ -86,7 +86,7 @@ def load_df(request):
         l.load('./media/'+filename, varName)
         dump_to_pkl(l.vardict, 'vardict')
 
-        context = load_pkl('context')
+        context = getContext()
         context['loaderMsg'] = "File successfully loaded"
         return render(request, 'home.html', context=context)
 
@@ -97,11 +97,11 @@ def file_upload(request):
         uploaded_file = request.FILES.get('file')
         save_file(uploaded_file)
         
-        context = load_pkl('context')
-        context['files'] = getMediaFiles()
+        context = getContext()
         print(context['files'])
-        # context['loaderMsg'] = "File successfully loaded"
-        render(request, 'home.html', context=context)
+        context['loaderMsg'] = "File successfully loaded"
+        return render(request, 'home.html', context=context)
+        # redirect('/abc')
     return HttpResponse('uploaded')
 
 

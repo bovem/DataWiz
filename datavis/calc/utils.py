@@ -35,7 +35,6 @@ def load_pkl(filename):
     except EOFError as e:
         obj = None
 
-    
     return obj
 
 
@@ -54,12 +53,40 @@ def addCell(cellName):
         json.dump(opList, json_file)
 
 
-
-
 def getMediaFiles():
     path = "./media/"
     lst = os.listdir(path)
     return lst
 
+def getContext():
+    context = load_pkl('context')
+    media_files = getMediaFiles()
 
-# cant load pickle file if saved according to name
+    # for list of operations
+    opList = []
+    json_file = open('./calc/json_dumps/oplist.json', 'r')
+    opList = json.load(json_file)
+    json_file.close()
+
+    if len(opList) == 0:
+        opList = []
+    
+    # for getting variable names
+    vardict = load_pkl('vardict')
+    if vardict != None:
+        varList = vardict.get_variables()
+    else:
+        varList = []
+
+    context['files'] = media_files
+    context['oplist'] = opList
+    context['varlist'] = varList
+
+    return context
+
+def setContext(key, value):
+    context = load_pkl('context')
+    context[key] = value 
+    dump_to_pkl(context, 'context')
+    return context
+

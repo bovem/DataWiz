@@ -1,5 +1,5 @@
 from django.urls import path
-
+from . import dash_plotly
 from . import views
 
 urlpatterns = [

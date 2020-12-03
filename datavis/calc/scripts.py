@@ -30,5 +30,5 @@ def convertCategorical(col_list):
 
 l = Loader()
 l.load("iron.csv", "abc")
-dump_to_pkl()
+dump_to_pkl(l.vardict, )
 
