@@ -6,21 +6,21 @@
             <h5>Cleaner</h5>
             <div class="row">
                 <div class="col-10 ">
-                    <form action="" class="form">
+                    <form action="/exec/cleaner" class="form">
                         {% csrf_token %}
                         <div class="form-group row">
                             <label for="clean-operation" class="col-sm-3">Cleaner</label>
-                            <select class="form-control col-sm-4" id="extension">
-                                <option>Remove Null value</option>
-                                <option>Fill Forward</option>
-                                <option>Fill Mean</option>
-                                <option>Fill Backward</option>
-                                <option>Fill Median </option>
+                            <select class="form-control col-sm-4" id="extension" name="operation">
+                                <option value="remove-null-value">Remove Null value</option>
+                                <option value="fill-forward">Fill Forward</option>
+                                <option value="fill-mean">Fill Mean</option>
+                                <option value="fill-backward">Fill Backward</option>
+                                <option value="fill-median">Fill Median </option>
                             </select>
                         </div>
                         <div class="form-group row">
-                            <label for="Variable" class="col-sm-3">Choose Variable: </label>
-                            <select name="variable" id="" class="form-control col-sm-4">
+                            <label for="var-name" class="col-sm-3">Choose Variable: </label>
+                            <select name="var-name" id="" class="form-control col-sm-4">
                                 {% for var in varlist %}
                                 <option value="{{ var }}">{{ var }}</option>
                                 {% endfor %}
@@ -31,7 +31,8 @@
                             <input class="form-control col-sm-4" type="text" name="encoding"
                                 placeholder="Enter New Variable Name">
                         </div>
-
+                        <!-- use this as a unique cell identifier -->
+                        <input type="text" value="cleaner" style="display: none;">
 
                         <button type="submit" style="position: absolute; right: 1px; bottom: 1px"
                             class="btn btn-light btn-lg">APPLY OPERATION</button>

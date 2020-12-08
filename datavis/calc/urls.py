@@ -1,5 +1,6 @@
 from django.urls import path
 from . import dash_plotly
+from . import dash_table
 from . import views
 
 urlpatterns = [
@@ -8,6 +9,7 @@ urlpatterns = [
     path('loader', views.load_df, name="loader"),
     path('cols', views.get_columns, name='get_cols'),
     path('table', views.show_table, name='get_files'),
+    path('exec/cleaner', views.cleaner, name="cleaner"),
     path('add/cleaner', views.addCleaner, name='addCleaner'),
     path('add/visualiser', views.addVisualizer, name='addVisualiser'),
     path('add/viewer', views.addViewer, name='addViewer'),

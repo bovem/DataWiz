@@ -1,11 +1,14 @@
-<div class="cell m-2 " style="height: 450px; background-color:#868484">
-    <div class="row">
+{%load plotly_dash%}
+<div class="cell m-2 p-2" style="height: 450px; background-color:#868484">
+    <!-- <div class="row">
         <div class="col-md-12">
             <h4 style="left: 15px; top: 10px;position: relative; color: white">Data</h4>
         </div>
-    </div>
-
-    <div class="row m-2">
+    </div> -->
+    <table id="table" class="table table-striped"  style="width: 100%;">
+        {%plotly_app name="Table" ratio=0.40%}
+    </table>
+    <!-- <div class="row m-2">
         <div class="col-md-10 mt-3 cell" style="height: 350px; background-color: white; overflow: scroll">
             {% include 'table.html' %}
         </div>
@@ -29,6 +32,6 @@
             </form>
         </div>
 
-    </div>
+    </div> -->
 
 </div>

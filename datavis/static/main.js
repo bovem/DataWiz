@@ -1,8 +1,15 @@
+// Dropzone.autoDiscover = false;
 $(document).ready(function () {
     $.noConflict();
-    $('.table').DataTable();
-    $(document).scrollTop($(document).height());
+    // a = $('.table').DataTable();
+    
+    // $(document).scrollTop($(document).height());
 
+    var dropzone = new Dropzone('.dropzone');
+    dropzone.on('success', function(file) {
+        window.location.href = '/'
+        console.log('a')
+    })
 });
 
 function addCleaner() {

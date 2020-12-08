@@ -40,14 +40,20 @@ def load_pkl(filename):
 
 def addCell(cellName):
     opList = []
+    opData = []
     print(cellName)
     with open('./calc/json_dumps/oplist.json', 'r') as json_file:
         opList = json.load(json_file)
+        
+    with open('./calc/json_dumps/opdata.json', 'r') as json_file:
+        opData = json.load(json_file)
 
     if len(opList) != 0:
         opList.append(cellName + '.html')
     else:
         opList = [cellName + '.html']
+
+    add_cell_data(opData, cellName)
 
     with open('./calc/json_dumps/oplist.json','w') as json_file:
         json.dump(opList, json_file)
@@ -74,7 +80,7 @@ def getContext():
     # for getting variable names
     vardict = load_pkl('vardict')
     if vardict != None:
-        varList = vardict.get_variables()
+        varList = vardict.get_var_list()
     else:
         varList = []
 
@@ -90,3 +96,28 @@ def setContext(key, value):
     dump_to_pkl(context, 'context')
     return context
 
+# Function not used outside util
+
+def add_cell_data(opData, cellName):
+      
+    def splitName(cellData):
+        cellType = cellData['type'].split('-')[0]
+        if cellType == cellName:
+            return True
+        else:
+            return False
+    
+    cells = list(filter(splitName, opData))
+    new_cell_idx = str(len(cells))
+
+    opData.append({
+        "type" : cellName + new_cell_idx
+    })
+
+def set_cell_data(opData, cellName, key, value):
+
+    for cell in opData:
+        if cell['type'] == cellName:
+            cell[key] = value
+    
+    

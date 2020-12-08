@@ -6,6 +6,8 @@ import os
 from .utils import *
 from .loader import Loader
 import json
+
+# from .modules.cleaner import *
 # from .var_dict import VarDict
 
 def home(request):
@@ -53,7 +55,7 @@ def home(request):
     # context = load_pkl('context')
     vardict = load_pkl('vardict')
     if vardict != None:
-        varList = vardict.get_variables()
+        varList = vardict.get_var_list()
     else:
         varList = []
     context = {
@@ -67,7 +69,6 @@ def home(request):
 
     dump_to_pkl(context, 'context')
     
-    # return render(request, 'home.html', {'files': lst, 'oplist': opList, 'data' :out , 'headers' : headers })
     return render(request, 'home.html',context= context )
 
 
@@ -105,6 +106,29 @@ def file_upload(request):
     return HttpResponse('uploaded')
 
 
+def cleaner(request):
+    operation = request.POST['operation']
+    var_name = request.POST['var-name']
+    new_var_name = request.POST['new-var-name']
+    inplace = False
+    if new_var_name == None or new_var_name == '':
+        inplace = true
+    
+    if operation == "remove-null-value":
+        remove_null(var_name, inplace, new_var_name)
+    elif operation == "fill-mean":
+        fill_mean(var_name, inplace, new_var_name)
+    elif operation == "fill-median":
+        fill_median(var_name, inplace, new_var_name)
+    elif operation == "fill-forward":
+        fill_forward(var_name, inplace, new_var_name)
+    elif operation == 'fill-backward':
+        fill_backward(var_name, inplace, new_var_name)
+
+def viewer(request):
+    var_name = request.POST['varname']
+
+
 def get_columns(request):
     obj = load_dump()
     print(obj)
@@ -122,21 +146,17 @@ def show_table(request):
     out = [row for row in reader]
     return render(request, 'table.html', {'data': out, 'headers': headers})
 
-
 def addCleaner(request):
     addCell('cleaner')
     return redirect('/')
-
 
 def addVisualizer(request):
     addCell('visualiser')
     return redirect('/')
 
-
 def addViewer(request):
     addCell('show')
     return redirect('/')
-
 
 def addTransformer(request):
     addCell('transformer')

@@ -18,8 +18,9 @@ class VarDict():
     def move_empty(self, var_name):
         self.add(find_in_vardict(self, "_")["data"], var_name)
 
-    def get_variables(self):
+    def get_var_list(self):
         var_list = []
         for var in self.var_dict:
             var_list.append(var['variable_name'])
         return var_list
+    

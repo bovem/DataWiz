@@ -10,7 +10,7 @@
             <h5>Data Source</h5>
             <div class="row">
                 <div class="col-4">
-                    <form action="/upload" method="POST" class="dropzone dz mx-auto" style="width: 100%; ">
+                    <form action="/upload" method="POST" class="dropzone dz mx-auto" id="dropzone" style="width: 100%; ">
                         {% csrf_token %}
                         <div class="fallback">
                             <input name="file" type="file" multiple />
@@ -83,18 +83,6 @@
 
         </div>
     </div>
-
-    <!-- <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            style="position: absolute; bottom: 0px; right:0px;">
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="/cleaner">Cleaner</a>
-            <a class="dropdown-item" href="#">Transformer</a>
-            <a class="dropdown-item" href="#">Visualiser</a>
-        </div>
-    </div> -->
-
 </div>
 
 <!-- <div class="cell m-2 ">

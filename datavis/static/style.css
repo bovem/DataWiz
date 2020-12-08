@@ -31,3 +31,8 @@ body {
     color: gray !important; 
     font-size:22px !important;
 }
+
+svg {
+    width: unset;
+    height: unset;
+}

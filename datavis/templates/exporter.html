@@ -1,0 +1,37 @@
+<div class="cell m-2 ">
+    <div class="row m-2">
+        <div class="col-md-12 ">
+
+            <form action="/table" method="GET" style="display: flex; justify-content: space-between">
+                {% csrf_token %}
+                <div style="display: inline;">
+                    <label for="varname-exporter">Choose Variable: </label>
+                    <select name="varname" id="varname-exporter">
+                        {% for file in files %}
+                        <option value="{{ file }}">{{ file }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div style="display: inline;">
+
+                    <label for="file-type" class="">File type</label>
+                    <select name="filetype">
+                        <option>CSV</option>
+                        <option>SQLite</option>
+                        <option>xlsx</option>
+                    </select>
+                </div>
+                <div style="display: inline;">
+                    <label for="file-name">File Name</label>
+                    <input type="text" placeholder="Filename">
+                </div>
+                <div>
+
+                    <button type="submit">Download</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>

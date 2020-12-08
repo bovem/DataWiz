@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig',
-    'calc'
+    'calc',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,16 @@ PLOTLY_COMPONENTS = [
     'dash_renderer',
     'dpd_components',
     'dpd_static_support',
+]
+
+STATICFILES_FINDERS = [
+
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+
+    'django_plotly_dash.finders.DashAssetFinder',
+    'django_plotly_dash.finders.DashComponentFinder',
+    'django_plotly_dash.finders.DashAppDirectoryFinder',
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -132,6 +143,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
