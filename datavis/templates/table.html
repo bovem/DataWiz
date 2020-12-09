@@ -1,17 +1,17 @@
-
+{% load custom_templates %}
 <table id="table" class="table table-striped"  style="width: 100%;">
     <thead>
         <tr>
-            {% for header in headers %}
+            {% for header in headers|lookup:cell.name %}
             <th>{{ header }}</th>
             {% endfor %}
         </tr>
     </thead>
     <tbody>
 
-        {% for row in data %}
+        {% for row in data|lookup:cell.name %}
         <tr>
-            {% for key, val in row.items %}
+            {% for val in row %}
             <td>
                 {{ val }}
             </td>

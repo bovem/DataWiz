@@ -1,5 +1,5 @@
 from .utils import find_in_vardict, check_for_df
-from .var_dict import Vardict
+from .var_dict import VarDict
 
 class Cleaner():
     def __init__(self, vardict=VarDict()):

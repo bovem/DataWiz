@@ -1,5 +1,5 @@
-from utils import find_in_vardict
-from var_dict import VarDict
+from .utils import find_in_vardict
+from .var_dict import VarDict
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, OneHotEncoder
 import numpy as np
 

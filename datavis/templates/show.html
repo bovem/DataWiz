@@ -1,37 +1,41 @@
-{%load plotly_dash%}
+
 <div class="cell m-2 p-2" style="height: 450px; background-color:#868484">
-    <!-- <div class="row">
+    <div class="row">
         <div class="col-md-12">
             <h4 style="left: 15px; top: 10px;position: relative; color: white">Data</h4>
         </div>
-    </div> -->
-    <table id="table" class="table table-striped"  style="width: 100%;">
-        {%plotly_app name="Table" ratio=0.40%}
-    </table>
-    <!-- <div class="row m-2">
+    </div>
+    <!-- <table id="table" class="table table-striped"  style="width: 100%;">
+        {   plotly_app name="Table" ratio=0.40%}
+    </table> -->
+    <div class="row m-2">
         <div class="col-md-10 mt-3 cell" style="height: 350px; background-color: white; overflow: scroll">
             {% include 'table.html' %}
         </div>
-
         <div class="vis-input col-md-2" style="position: relative; top :30px">
-            <form action="">
+            <form action="/exec/viewer" method="POST">
                 {% csrf_token %}
                 <div class=" row" style="color: white; font-size: 16px; ">
                     <div class="col-md-12 mt-1">
                         <div class="form-group">
                             <label for="Variable" >Choose Variable: </label>
-                            <select name="variable" id="" style="background-color: #c4c4c4;">
+                            <select name="varname" id="" style="background-color: #c4c4c4;">
                                 {% for var in varlist %}
-                                <option value="{{ var }}">{{ var }}</option>
+                                    {% if var == cell.data.varname %}
+                                    <option value="{{ var }}" selected>{{ var }}</option>
+                                    {% else %}
+                                    <option value="{{ var }}">{{ var }} </option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
                         </div>
                     </div>
                 </div>
+                <input type="hidden" name="cellname" value="{{ cell.name }}" id="{{ cell.name }}">
                 <button type="submit" class="btn btn-light"> Show </button>
             </form>
         </div>
 
-    </div> -->
+    </div>
 
 </div>

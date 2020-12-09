@@ -3,13 +3,13 @@ body {
 }
 
 .dz {
-    border: dashed !important;
+    border: dashed ;
     border-color: #ccc;
-    border-radius: 10px !important;
+    border-radius: 10px ;
 }
 
 .dz:hover {
-    background-color: aliceblue !important;
+    background-color: aliceblue ;
 }
 
 .cell {

@@ -1,14 +1,18 @@
-// Dropzone.autoDiscover = false;
+Dropzone.autoDiscover = false;
 $(document).ready(function () {
     $.noConflict();
-    // a = $('.table').DataTable();
+    a = $('.table').DataTable();
     
-    // $(document).scrollTop($(document).height());
 
-    var dropzone = new Dropzone('.dropzone');
-    dropzone.on('success', function(file) {
-        window.location.href = '/'
+    var currCell = $('div.currentCell').get(0)
+    if(currCell !== undefined)
+        currCell.scrollIntoView()
+
+    var dropzone = new Dropzone('#dropzone');
+    // console.log(dropzone)
+    dropzone.on('success', function(file, resp) {
         console.log('a')
+        window.location.href = '/'
     })
 });
 

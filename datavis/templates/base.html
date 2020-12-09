@@ -25,9 +25,9 @@
   <script type="text/javascript" charset="utf8"
     src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 
-    <!-- <link rel="stylesheet" href="{% static 'jquery.dataTables.css '%}">
+  <!-- <link rel="stylesheet" href="{% static 'jquery.dataTables.css '%}">
     <script src="{% static 'jquery.dataTables.js' %}"></script> -->
-    
+
   <!-- PLotly.js -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
@@ -47,15 +47,20 @@
           <i class="fa fa-caret-down icon" aria-hidden="true"></i>
         </span>
       </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <div class="dropdown-menu" aria-labelledby="add-cell-dropdown">
         <a class="dropdown-item" href="/add/cleaner">Cleaner</a>
         <a class="dropdown-item" href="/add/transformer">Transformer</a>
         <a class="dropdown-item" href="/add/visualiser">Visualiser</a>
         <a class="dropdown-item" href="/add/viewer">Viewer</a>
+        <a class="dropdown-item" href="/add/exporter">Exporter</a>
       </div>
 
       <button class="btn btn-dark" type="button">
         <i class="fa fa-download icon" aria-hidden="true"></i>
+        <!-- <i class="fa fa-caret-down" aria-hidden="true" style="color: gray; font-size:22px ;"></i> -->
+      </button>
+      <button class="btn btn-dark" type="button" data-toggle="tooltip" data-placement="bottom" title="Reset Workspace">
+        <a href="/reset"><i class="fa fa-minus-circle icon"></i></a>
         <!-- <i class="fa fa-caret-down" aria-hidden="true" style="color: gray; font-size:22px ;"></i> -->
       </button>
     </div>

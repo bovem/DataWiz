@@ -37,31 +37,36 @@ def load_pkl(filename):
 
     return obj
 
+def dump_to_json(obj, filename):
+    with open('./calc/json_dumps/'+ filename + '.json','w') as json_file:
+        json.dump(obj, json_file)
+
+
+def load_json(filename):
+    try:
+        with open('./calc/json_dumps/' + filename +'.json') as json_file:
+            data = json.load(json_file)
+    except EOFError as e:
+        data = None
+    
+    return data
+
 
 def addCell(cellName):
-    opList = []
-    opData = []
-    print(cellName)
-    with open('./calc/json_dumps/oplist.json', 'r') as json_file:
-        opList = json.load(json_file)
-        
+    opData = []        
     with open('./calc/json_dumps/opdata.json', 'r') as json_file:
         opData = json.load(json_file)
 
-    if len(opList) != 0:
-        opList.append(cellName + '.html')
-    else:
-        opList = [cellName + '.html']
-
     add_cell_data(opData, cellName)
 
-    with open('./calc/json_dumps/oplist.json','w') as json_file:
-        json.dump(opList, json_file)
+    with open('./calc/json_dumps/opdata.json','w') as json_file:
+        json.dump(opData, json_file)
 
 
 def getMediaFiles():
     path = "./media/"
     lst = os.listdir(path)
+    lst.remove('downloads')
     return lst
 
 def getContext():
@@ -69,13 +74,8 @@ def getContext():
     media_files = getMediaFiles()
 
     # for list of operations
-    opList = []
-    json_file = open('./calc/json_dumps/oplist.json', 'r')
-    opList = json.load(json_file)
-    json_file.close()
 
-    if len(opList) == 0:
-        opList = []
+    opdata = load_json('opdata')
     
     # for getting variable names
     vardict = load_pkl('vardict')
@@ -85,7 +85,7 @@ def getContext():
         varList = []
 
     context['files'] = media_files
-    context['oplist'] = opList
+    context['opdata'] = opdata
     context['varlist'] = varList
 
     return context
@@ -101,7 +101,7 @@ def setContext(key, value):
 def add_cell_data(opData, cellName):
       
     def splitName(cellData):
-        cellType = cellData['type'].split('-')[0]
+        cellType = cellData['name'].split('-')[0]
         if cellType == cellName:
             return True
         else:
@@ -109,15 +109,17 @@ def add_cell_data(opData, cellName):
     
     cells = list(filter(splitName, opData))
     new_cell_idx = str(len(cells))
-
+    setContext('currentCell', cellName + "-" + new_cell_idx)
     opData.append({
-        "type" : cellName + new_cell_idx
+        "type" : cellName+'.html',
+        "name" : cellName + "-" + new_cell_idx,
+        "data" : {}
     })
 
 def set_cell_data(opData, cellName, key, value):
 
     for cell in opData:
-        if cell['type'] == cellName:
-            cell[key] = value
+        if cell['name'] == cellName:
+            cell['data'][key] = value
     
     

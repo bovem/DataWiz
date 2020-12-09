@@ -4,47 +4,50 @@
             <h5>Data Transformation</h5>
             <div class="row">
                 <div class="col-8 ">
-                    <form action="" class="form">
+                    <form action="/exec/transformer" method="POST" class="form">
                         {% csrf_token %}
                         <div class="form-group row">
                             <label for="clean-operation" class="col-sm-3">Transformation</label>
-                            <select class="form-control col-sm-4" id="extension">
-                                <option>One Hot Encoding</option>
-                                <option>Normalizer</option>
-                                <option>Standardizer</option>
-                                <!-- <option>Fill Backward</option>
-                                <option>Fill Median </option> -->
+                            <select class="form-control col-sm-4" id="operation-transform" name="operation">
+                                <option value="one-hot-encoding">One Hot Encoding</option>
+                                <option value="noramlizer">Normalizer</option>
+                                <option value="standardizer">Standardizer</option>
                             </select>
                         </div>
                         <div class="form-group row">
                             <label for="Variable" class="col-sm-3">Choose Variable: </label>
-                            <select name="variable" id="" class="form-control col-sm-4">
+                            <select name="varname" id="" class="form-control col-sm-4">
                                 {% for var in varlist %}
-                                <option value="{{ var }}">{{ var }}</option>
+                                    {% if var == cell.data.varname %}
+                                    <option value="{{ var }}" selected>{{ var }}</option>
+                                    {% else %}
+                                    <option value="{{ var }}">{{ var }} </option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="form-group row">
-                            <label for="new-var-name" class="col-sm-3">New Variable Name</label>
-                            <input class="form-control col-sm-4" type="text" name="encoding"
-                                placeholder="Enter New Variable Name">
+                            <label for="new-varname" class="col-sm-3">New Variable Name</label>
+                            <input class="form-control col-sm-4" type="text" name="new_varname"
+                                placeholder="Enter New Variable Name" value="{{ cell.data.new_varname }}" required>
                         </div>
 
                         <div class="form-group row">
                             <label for="col-name" class="col-sm-3">Column Name</label>
-                            <input class="form-control col-sm-4" type="text" name="encoding" placeholder="Column to perform operation">
+                            <input class="form-control col-sm-4" type="text" name="col_name" value="{{ cell.data.col_name }}" placeholder="Column to perform operation" required>
                         </div>
 
+                        <input type="hidden" value="{{ cell.name }}" name="cellname">
 
-                        <button type="submit" style="position: absolute; right: 1px; bottom: 1px"
-                            class="btn btn-light btn-lg">APPLY OPERATION</button>
+                        <div style="position: absolute; right: 1px; bottom: 1px">
 
+                            <button type="submit" class="btn btn-light btn-lg">APPLY OPERATION</button>
+                            <p style="color: green;">{{ cell.data.msg }}</p>
+                        </div>
 
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
-
 </div>
