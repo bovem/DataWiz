@@ -8,54 +8,54 @@
 
             <div class="row">
                 <div class="col-8">
-            <form action="/exec/joiner" method="POST" >
-                {% csrf_token %}
-<div class="form-group row">
-                <label for="varname-exporter" class="col-sm-3">Variable 1 </label>
+                    <form action="/exec/joiner" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label for="varname-exporter" class="col-sm-3">Variable 1 </label>
 
-                    <select class="col-sm-4" name="varname" id="varname-exporter" class="input-bg">
-                        {% for var in varlist %}
-                            {% if var == cell.data.varname %}
-                            <option value="{{ var }}" selected>{{ var }}</option>
-                            {% else %}
-                            <option value="{{ var }}">{{ var }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
+                            <select class="col-sm-4" name="varname" id="varname-exporter" class="input-bg">
+                                {% for var in varlist %}
+                                {% if var == cell.data.varname %}
+                                <option value="{{ var }}" selected>{{ var }}</option>
+                                {% else %}
+                                <option value="{{ var }}">{{ var }}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
 
+                        </div>
+                        <div class="form-group row">
+                            <label for="varname-2" class="col-sm-3">Variable 2 </label>
+
+                            <select class="col-sm-4" name="varname" id="varname-exporter" class="input-bg">
+                                {% for var in varlist %}
+                                {% if var == cell.data.varname2 %}
+                                <option value="{{ var }}" selected>{{ var }}</option>
+                                {% else %}
+                                <option value="{{ var }}">{{ var }}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+
+                        </div>
                 </div>
-                <div class="form-group row">
-                    <label for="varname-2" class="col-sm-3">Variable 2 </label>
-    
-                        <select class="col-sm-4" name="varname" id="varname-exporter" class="input-bg">
-                            {% for var in varlist %}
-                            {% if var == cell.data.varname2 %}
-                            <option value="{{ var }}" selected>{{ var }}</option>
-                            {% else %}
-                            <option value="{{ var }}">{{ var }}</option>
-                            {% endif %}
-                            {% endfor %}
-                        </select>
-    
-                    </div>
-            </div>
                 <div class="col-4">
                     <div class="form-group row">
                         <label for="filename" class="col-sm-6">New Variable Name</label>
-                        <input type="text" placeholder="" value="{{ cell.data.new_varname }}"
-                            name="new_varname" class="col-sm-4">
+                        <input type="text" placeholder="" value="{{ cell.data.new_varname }}" name="new_varname"
+                            class="col-sm-4">
                     </div>
                     <div class="row">
 
-                            <input type="hidden" value="{{ cell.name }}" name="cellname">
-                            <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
+                        <input type="hidden" value="{{ cell.name }}" name="cellname">
+                        <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
                             class="btn col-8 offset-1">Join</button>
                     </div>
                 </div>
 
-            </form>
+                </form>
 
-        </div>
+            </div>
         </div>
     </div>
     <hr>

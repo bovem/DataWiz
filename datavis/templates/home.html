@@ -11,7 +11,8 @@
             <hr>
             <div class="row">
                 <div class="col-4">
-                    <form action="/upload" method="POST" class="dropzone dz mx-auto" id="dropzone" style="width: 100%; ">
+                    <form action="/upload" method="POST" class="dropzone dz mx-auto" id="dropzone"
+                        style="width: 100%; ">
                         {% csrf_token %}
                         <div class="fallback">
                             <input name="file" type="file" />
@@ -36,7 +37,7 @@
                                     <label class="col-sm-6">Variable Name</label>
                                     <input class="form-control col-sm-6" type="text" name="variable" placeholder="">
                                 </div>
-                                
+
 
                                 <div class="form-group row">
                                     <label class="col-sm-6" for="file">Choose File</label>
@@ -57,11 +58,11 @@
                                 </div>
 
                                 <div class="row">
-                                <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
-                                class="btn col-sm-6 offset-6">Load Dataframe</button>
+                                    <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
+                                        class="btn col-sm-6 offset-6">Load Dataframe</button>
                                 </div>
                             </div>
-                            
+
 
                             <h4 style="color: green;">{{ loaderMsg }}</h4>
                         </div>
@@ -71,8 +72,8 @@
             </div>
         </div>
     </div>
-    
-<hr>
+
+    <hr>
 </div>
 
 <!-- 
@@ -102,15 +103,15 @@
 </div> -->
 
 {% for cell in opdata %}
-    {% if currentCell == cell.name %}
-        <div class="currentCell">
-            {% include cell.type %}
-        </div>
-    {% else %}
-        <div>
-            {% include cell.type %}
-        </div>
-    {% endif %}
+{% if currentCell == cell.name %}
+<div class="currentCell">
+    {% include cell.type %}
+</div>
+{% else %}
+<div>
+    {% include cell.type %}
+</div>
+{% endif %}
 
 {% endfor %}
 

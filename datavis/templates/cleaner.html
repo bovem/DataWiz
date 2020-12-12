@@ -34,29 +34,28 @@
                                 <option value="fill-median">Fill Median </option>
                             </select>
                         </div>
-                        </div>
-                        <div class="col-6">
-
-
-                        <div class="form-group row">
-                            <label for="new_varname" class="col-4">New Variable Name</label>
-                            <input class="form-control col-4" type="text"
-                                value="{{ cell.data.new_varname|default:'' }}" name="new_varname"
-                                placeholder="">
-                        </div>
-                        <!-- use this as a unique cell identifier -->
-                        <input type="hidden" value="{{ cell.name }}" name="cellname">
-
-                            <div class="row">
-                            <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
-                            class="btn col-4 offset-4">Apply Operation</button>
-                            <p style="color: green;">{{ cell.data.msg }}</p>
-                        </div>
-                    </form>
                 </div>
+                <div class="col-6">
+
+
+                    <div class="form-group row">
+                        <label for="new_varname" class="col-4">New Variable Name</label>
+                        <input class="form-control col-4" type="text" value="{{ cell.data.new_varname|default:'' }}"
+                            name="new_varname" placeholder="">
+                    </div>
+                    <!-- use this as a unique cell identifier -->
+                    <input type="hidden" value="{{ cell.name }}" name="cellname">
+
+                    <div class="row">
+                        <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
+                            class="btn col-4 offset-4">Apply Operation</button>
+                        <p style="color: green;">{{ cell.data.msg }}</p>
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-
-        <hr>
     </div>
+
+    <hr>
+</div>

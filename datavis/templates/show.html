@@ -1,4 +1,3 @@
-
 <div class="cell m-2" style="height: 750px;">
     <div class="row m-2">
         <div class="col-md-12">
@@ -19,36 +18,37 @@
             <form action="/exec/viewer" method="POST">
                 {% csrf_token %}
                 <div class="col-md-6">
-                <div class="form-group row">
-                    <label for="Variable" class="col-sm-3">Variable Name</label>
-                    <select name="varname" id="" class="form-control col-sm-4">
-                        {% for var in varlist %}
+                    <div class="form-group row">
+                        <label for="Variable" class="col-sm-3">Variable Name</label>
+                        <select name="varname" id="" class="form-control col-sm-4">
+                            {% for var in varlist %}
                             {% if var == cell.data.varname %}
                             <option value="{{ var }}" selected>{{ var }}</option>
                             {% else %}
                             <option value="{{ var }}">{{ var }} </option>
                             {% endif %}
-                        {% endfor %}
-                    </select>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <label for="view-type" class="col-4"> Formatted </label>
+                        <input type="checkbox" name="check" style="height: 20px; width: 20px;" checked>
+
+                    </div>
                 </div>
-            <div class="col-md-6">
-                <div class="row">
-                <label for="view-type" class="col-4"> Formatted </label>
-                <input type="checkbox" name="check" style="height: 20px; width: 20px;" checked> 
-                
-            </div>
-            </div>
-            <div class="col-md-12 m-3">
-                <div class="row ">
-                    <input type="hidden" value="{{ cell.name }}" name="cellname">
-                    <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;" class="btn col-md-2"> Show </button>
+                <div class="col-md-12 m-3">
+                    <div class="row ">
+                        <input type="hidden" value="{{ cell.name }}" name="cellname">
+                        <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
+                            class="btn col-md-2"> Show </button>
+                    </div>
                 </div>
-            </div>
             </form>
+        </div>
+
+
     </div>
-
-
-</div>
-<hr>
+    <hr>
 </div>

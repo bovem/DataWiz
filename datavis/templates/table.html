@@ -1,7 +1,7 @@
 {% load custom_templates %}
 <div class="table-div">
 
-    <table class="table table-checked"  ">
+    <table class="table table-checked" ">
         <thead>
             <tr>
                 {% for header in headers|lookup:cell.name %}
@@ -26,11 +26,11 @@
 </div>
 
 
-<div class="array-div">
-    [{{ headers|lookup:cell.name }}
-     {% for row in data|lookup:cell.name %}
+<div class=" array-div">
+        [{{ headers|lookup:cell.name }}
+        {% for row in data|lookup:cell.name %}
         <div>
             {{ row }}
         </div>
-    {% endfor %}]
+        {% endfor %}]
 </div>
