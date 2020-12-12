@@ -1,6 +1,6 @@
 Dropzone.autoDiscover = false;
 $(document).ready(function () {
-    $("input[type='checkbox']").on('change',function() {
+    $("#formatted-table").on('change',function() {
         if(!this.checked) {
             $('.table-div').hide();
             $('.array-div').show();
@@ -11,7 +11,7 @@ $(document).ready(function () {
         }
     })
     $.noConflict();
-    a = $('.table').DataTable();
+    // a = $('.table').DataTable();
 
     var currCell = $('div.currentCell').get(0)
     if(currCell !== undefined)
