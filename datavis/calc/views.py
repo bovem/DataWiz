@@ -37,7 +37,18 @@ def load_df(request):
         varName = request.POST.get('variable')
         encoding = request.POST.get('encoding')
 
-        l.load('./media/'+filename, varName)
+        if filetype=='csv':
+            l.load_csv('./media/'+filename, varName)
+            
+        elif filetype=='xlsx':
+            l.load_excel('./media/'+filename, varName)
+
+        elif filetype=='html':
+            l.load_html('./media/'+filename, varName)
+
+        elif filetype=='json':
+            l.load_json('./media/'+filename, varName)
+
         dump_to_pkl(l.vardict, 'vardict')
 
         context = getContext()
@@ -173,6 +184,10 @@ def exporter(request):
         e.export_json(varname, filename)
     elif file_type == 'csv':
         e.export_csv(varname, filename)
+    elif file_type == 'html':
+        e.export_html(varname, filename)
+    elif file_type == 'xlsx':
+        e.export_excel(varname, filename)
 
     with open('./media/downloads/'+filename + '.'+file_type, 'r') as fh:
         download_file = fh.read()
