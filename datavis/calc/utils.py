@@ -66,7 +66,7 @@ def addCell(cellName):
 def getMediaFiles():
     path = "./media/"
     lst = os.listdir(path)
-    lst.remove('downloads')
+    #lst.remove('downloads')
     return lst
 
 def getContext():
