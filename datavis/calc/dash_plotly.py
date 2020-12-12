@@ -21,7 +21,9 @@ else:
     varList = []
 
 vis_obj = Visualiser(vardict)
-plot_list = ['line', 'bar', 'scatter']
+
+plot_list = ['line', 'bar', 'histogram', 'pie']
+
 axis_variable = dbc.Row(
     [
         dbc.Col(
@@ -163,14 +165,31 @@ def make_graph(x, y, xlabel, ylabel, plot_type, gtitle, varname):
 
     x_values = []
     y_values = []
-    if varname != None and x != None and y != None and plot_type != None:
+    data_dict = []
+
+    if (plot_type=='line' or plot_type=='bar') and varname != None and x != None and y != None and plot_type != None:
         x_values = vis_obj.get_values(varname, x, 500)
         y_values = vis_obj.get_values(varname, y, 500)
 
+        data_dict =  [
+                {'x': x_values, 'y': y_values, 'type': plot_type, 'name': 'sample'}
+            ]
+
+    elif (plot_type=='histogram') and varname != None and x != None and plot_type != None:
+        x_values = vis_obj.get_values(varname, x, 500) 
+        df = vis_obj.get_dataframe(varname)
+        data_dict = [
+            {'df':df, 'x':x_values, 'type':plot_type}
+        ]
+    
+    elif (plot_type=='pie') and varname != None and x != None and y != None and plot_type != None:
+        df = vis_obj.get_dataframe(varname)
+        data_dict = [
+            {'df':df, 'values':x, 'names':y, 'type':plot_type}
+        ]
+
     figure = {
-        'data': [
-            {'x': x_values, 'y': y_values, 'type': plot_type, 'name': 'sample'}
-        ],
+        'data':data_dict,
         'layout': {
             'title': gtitle,
             'xaxis': dict(

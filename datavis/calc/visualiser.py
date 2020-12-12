@@ -25,3 +25,6 @@ class Visualiser():
             df = df['data']
             lst = list(df.columns)
         return lst
+    
+    def get_dataframe(self, varname):
+        df = find_in_vardict(self.vardict, varname)['data']
