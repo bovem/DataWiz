@@ -34,17 +34,19 @@
   <link rel="stylesheet" href="{% static 'style.css' %}">
   <script src="{% static 'main.js' %}"></script>
 
-  <title>DataVis {% block title %}{% endblock title %}</title>
+  <title>DataWiz {% block title %}{% endblock title %}</title>
 </head>
 
 <body>
-  <nav class="navbar navbar-dark p-2 sticky-top" style="background-color: #393939;">
-
-    <div class="dropdown" style=" left:20px; position: relative; background-color:#393939;">
+  <nav class="navbar navbar-dark p-2 sticky-top" style="background-color: #010506;">
+    <a class="navbar-brand" href="#">
+      <img src="{% static 'images/logo.PNG' %}" width="150" height="30" alt="">
+    </a>
+    <div class="dropdown" style=" left:600px; position: relative; background-color:#010506;">
       <button class="btn btn-dark" type="button" data-toggle="dropdown">
         <span class="btn-dark">
           <i class="fa fa-plus icon" aria-hidden="true"></i>
-          <i class="fa fa-caret-down icon" aria-hidden="true"></i>
+         <!-- <i class="fa fa-caret-down icon" aria-hidden="true"></i> -->
         </span>
       </button>
       <div class="dropdown-menu" aria-labelledby="add-cell-dropdown">

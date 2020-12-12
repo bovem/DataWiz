@@ -20,12 +20,13 @@ body {
 }
 
 .outer-cell {
-    background-color:#868484;
+    background-color:white;
     color: white;
 }
 
 .btn-dark {
-    background-color: #393939;
+    background-color: #010506;
+    border-color: orange;
 }
 
 .input-bg {
@@ -33,7 +34,7 @@ body {
 }
 
 .icon {
-    color: gray !important; 
+    color: white !important; 
     font-size:22px !important;
 }
 
