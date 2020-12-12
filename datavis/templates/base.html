@@ -50,6 +50,7 @@
       <div class="dropdown-menu" aria-labelledby="add-cell-dropdown">
         <a class="dropdown-item" href="/add/cleaner">Cleaner</a>
         <a class="dropdown-item" href="/add/transformer">Transformer</a>
+        <a class="dropdown-item" href="/add/joiner">Joiner</a>
         <a class="dropdown-item" href="/add/visualiser">Visualiser</a>
         <a class="dropdown-item" href="/add/viewer">Viewer</a>
         <a class="dropdown-item" href="/add/exporter">Exporter</a>
@@ -59,8 +60,8 @@
         <i class="fa fa-download icon" aria-hidden="true"></i>
         <!-- <i class="fa fa-caret-down" aria-hidden="true" style="color: gray; font-size:22px ;"></i> -->
       </button>
-      <button class="btn btn-dark" type="button" data-toggle="tooltip" data-placement="bottom" title="Reset Workspace">
-        <a href="/reset"><i class="fa fa-minus-circle icon"></i></a>
+      <button class="btn btn-dark" type="button" id="reset-button" onclick="confirmReset()" data-toggle="tooltip" data-placement="bottom" title="Reset Workspace">
+        <i class="fa fa-minus-circle icon"></i>
         <!-- <i class="fa fa-caret-down" aria-hidden="true" style="color: gray; font-size:22px ;"></i> -->
       </button>
     </div>

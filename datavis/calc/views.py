@@ -146,8 +146,8 @@ def viewer(request):
         df = find_in_vardict(vardict, var_name)['data']
         opdata = load_json('opdata')
         set_cell_data(opdata, cellname, 'varname', var_name)
-        header = [str(col) for col in df.columns]
-        data = [[str(df.iloc[i][col]) for col in df.columns]
+        header = [col for col in df.columns]
+        data = [[df.iloc[i][col] for col in df.columns]
                 for i in range(len(df))]
 
         context = load_pkl('context')
@@ -183,18 +183,48 @@ def exporter(request):
 
     return response
 
+def joiner(request):
+    varname1 = request.POST.get('varname')
+    varname2 = request.POST.get('varname-2')
+    new_varname = request.POST.get('new_varname')
+    cellname = request.POST.get('cellname')
+
+    opdata = load_json('opdata')
+    set_cell_data(opdata, cellname, 'varname', varname1)
+    set_cell_data(opdata, cellname, 'varname2', varname2)
+    set_cell_data(opdata, cellname, 'new_varname', new_varname)
+
+    setContext('cellname', cellname)
+    vardict = load_pkl('vardict')
+    c = Cleaner(vardict)
+    c.joiner(varname1, varname2, True,new_varname)
+    dump_to_pkl(c.vardict,'vardict')
+    dump_to_json(opdata, 'opdata')
+
+    return redirect('/')
+
 
 def show_table(request):
-    filename = request.GET.get('file')
-    infile = open('./media/' + filename, 'r')
-    reader = csv.DictReader(infile)
-    headers = [col for col in reader.fieldnames]
-    out = [row for row in reader]
-    return render(request, 'table.html', {'data': out, 'headers': headers})
+    v = load_pkl('vardict')
+    varname = request.GET.get('varname')
+    data = v.show_data(varname)
+    # data = json.dumps(data)
+    data = data.reset_index().to_json(orient='split')
+    
+    data = json.loads(data)
+    # html_file = open('./templates/tale.html','w')
+    # html_file.write(data)
+    # html_file.close()
+    # return HttpResponse(data) 
+    return render(request, 'tale.html', {'data':data.values})
 
 
 def addCleaner(request):
     addCell('cleaner')
+    return redirect('/')
+
+def addJoiner(request):
+    addCell('joiner')
     return redirect('/')
 
 

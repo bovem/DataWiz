@@ -1,8 +1,17 @@
 Dropzone.autoDiscover = false;
 $(document).ready(function () {
+    $("input[type='checkbox']").on('change',function() {
+        if(!this.checked) {
+            $('.table-div').hide();
+            $('.array-div').show();
+        }
+        else {
+            $('.table-div').show();
+            $('.array-div').hide();
+        }
+    })
     $.noConflict();
     a = $('.table').DataTable();
-    
 
     var currCell = $('div.currentCell').get(0)
     if(currCell !== undefined)
@@ -14,27 +23,14 @@ $(document).ready(function () {
         console.log('a')
         window.location.href = '/'
     })
+
 });
 
-function addCleaner() {
-    console.log('reached till cleaner')
-    fetch('/', {
-        method: 'POST',
-        body: JSON.stringify({
-            cell: 'cleaner.html',
-            data: {
-                // Adding other params of the block 
-            }
-        }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then((response) => {
-        return response.json();
-    }).then((data) => {
-        if (data['data'] == 'success') {
-            console.log(data)
-            window.location.href = '/'
-        }
-    })
+function confirmReset(){
+    var a = confirm('Are you sure want to reset the workspace?')
+    if(a == true) {
+        fetch('/reset')
+        window.location.href = '/'
+    }
 }
+

@@ -6,6 +6,11 @@ class VarDict():
         self.var_dict = []
     
     def add(self, data, var_name, data_type=pd.DataFrame):
+        for i in range(len(self.var_dict)):
+            if self.var_dict[i].get('variable_name') == var_name:
+                del self.var_dict[i]
+                break
+
         self.var_dict.append({
             "variable_name":var_name,
             "data": data,

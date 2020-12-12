@@ -164,8 +164,8 @@ def make_graph(x, y, xlabel, ylabel, plot_type, gtitle, varname):
     x_values = []
     y_values = []
     if varname != None and x != None and y != None and plot_type != None:
-        x_values = vis_obj.get_values(varname, x, 50)
-        y_values = vis_obj.get_values(varname, y, 50)
+        x_values = vis_obj.get_values(varname, x, 500)
+        y_values = vis_obj.get_values(varname, y, 500)
 
     figure = {
         'data': [

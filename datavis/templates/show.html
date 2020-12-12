@@ -9,7 +9,7 @@
         {   plotly_app name="Table" ratio=0.40%}
     </table> -->
     <div class="row m-2">
-        <div class="col-md-10 mt-3 cell" style="height: 350px; background-color: white; overflow: scroll">
+        <div class="col-md-10 mt-3 cell " style="height: 350px; background-color: white; overflow: scroll">
             {% include 'table.html' %}
         </div>
         <div class="vis-input col-md-2" style="position: relative; top :30px">
@@ -34,6 +34,8 @@
                 <input type="hidden" name="cellname" value="{{ cell.name }}" id="{{ cell.name }}">
                 <button type="submit" class="btn btn-light"> Show </button>
             </form>
+            <label for="view-type"> Formatted </label>
+            <input type="checkbox" name="check" checked> 
         </div>
 
     </div>

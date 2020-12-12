@@ -16,6 +16,7 @@ body {
     border-style: solid !important;
     border-color: black !important;
     border-width: 1px !important;
+    
 }
 
 .outer-cell {
@@ -25,6 +26,10 @@ body {
 
 .btn-dark {
     background-color: #393939;
+}
+
+.input-bg {
+    background-color: #c4c4c4;
 }
 
 .icon {

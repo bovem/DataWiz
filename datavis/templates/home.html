@@ -56,7 +56,7 @@
 </div>
 
 
-
+<!-- 
 <div class="cell m-2 ">
     <div class="row m-2">
         <div class="col-md-12 ">
@@ -64,8 +64,8 @@
             <form action="/table" method="GET" style="display: inline;">
                 {% csrf_token %}
                 <label for="file">Choose File: </label>
-                <select name="file" id="">
-                    {% for file in files %}
+                <select name="varname" id="">
+                    {% for file in varlist %}
                     <option value="{{ file }}">{{ file }}</option>
                     {% endfor %}
                 </select>
@@ -80,7 +80,7 @@
 
         </div>
     </div>
-</div>
+</div> -->
 
 {% for cell in opdata %}
     {% if currentCell == cell.name %}

@@ -1,8 +1,7 @@
-<div class="cell m-2 " style="background-color: #868484;">
+<div class="cell m-2 " style=" background-color:#868484;">
     <div class="row m-2">
         <div class="col-md-12 ">
-
-            <form action="/exec/exporter" method="POST" style="display: flex; justify-content: space-between">
+            <form action="/exec/joiner" method="POST" style="display: flex; justify-content: space-between">
                 {% csrf_token %}
                 <div style="display: inline;">
                     <label for="varname-exporter">Choose Variable: </label>
@@ -17,26 +16,27 @@
                     </select>
                 </div>
                 <div style="display: inline;">
-
-                    <label for="file-type">File type</label>
-                    <select name="filetype" class="input-bg">
-                        <option value="csv">CSV</option>
-                        <option>SQLite</option>
-                        <option value="json">json</option>
-                        <!-- <option value="jso"></option> -->
+                    <label for="varname-exporter">Choose Variable: </label>
+                    <select name="varname-2" id="varname-exporter" class="input-bg">
+                        {% for var in varlist %}
+                        {% if var == cell.data.varname2 %}
+                        <option value="{{ var }}" selected>{{ var }}</option>
+                        {% else %}
+                        <option value="{{ var }}">{{ var }}</option>
+                        {% endif %}
+                        {% endfor %}
                     </select>
                 </div>
                 <div style="display: inline;">
-                    <label for="filename">File Name</label>
-                    <input type="text" placeholder="Filename" name="filename" value="{{ cell.data.filename }}">
+                    <label for="filename"></label>
+                    <input type="text" placeholder="New Variable Name" value="{{ cell.data.new_varname }}"
+                        name="new_varname">
                 </div>
                 <div>
                     <input type="hidden" value="{{ cell.name }}" name="cellname">
-                    <button type="submit">Download</button>
+                    <button type="submit">Join</button>
                 </div>
             </form>
-
-
         </div>
     </div>
 </div>

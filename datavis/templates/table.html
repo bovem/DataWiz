@@ -1,23 +1,36 @@
 {% load custom_templates %}
-<table id="table" class="table table-striped"  style="width: 100%;">
-    <thead>
-        <tr>
-            {% for header in headers|lookup:cell.name %}
-            <th>{{ header }}</th>
-            {% endfor %}
-        </tr>
-    </thead>
-    <tbody>
+<div class="table-div">
 
-        {% for row in data|lookup:cell.name %}
-        <tr>
-            {% for val in row %}
-            <td>
-                {{ val }}
-            </td>
+    <table class="table table-checked"  style="width: 100%;">
+        <thead>
+            <tr>
+                {% for header in headers|lookup:cell.name %}
+                <th>{{ header }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+    
+            {% for row in data|lookup:cell.name %}
+            <tr>
+                {% for val in row %}
+                <td>
+                    {{ val }}
+                </td>
+                {% endfor %}
+            </tr>
             {% endfor %}
-        </tr>
-        {% endfor %}
+    
+        </tbody>
+    </table>
+</div>
 
-    </tbody>
-</table>
+
+<div class="array-div">
+    [{{ headers|lookup:cell.name }}
+     {% for row in data|lookup:cell.name %}
+        <div>
+            {{ row }}
+        </div>
+    {% endfor %}]
+</div>
