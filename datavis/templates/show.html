@@ -1,8 +1,8 @@
 
-<div class="cell m-2 p-2" style="height: 450px; background-color:#868484">
-    <div class="row">
-        <div class="col-md-12 m-2">
-            <h3>Data Vizualizer</h3>
+<div class="cell m-2" style="height: 750px;">
+    <div class="row m-2">
+        <div class="col-md-12">
+            <h3>Data Viewer</h3>
             <hr>
         </div>
     </div>
@@ -10,35 +10,45 @@
         {   plotly_app name="Table" ratio=0.40%}
     </table> -->
     <div class="row m-2">
-        <div class="col-md-10 cell " style="height: 350px; background-color: white; overflow: scroll">
+        <div class="col-12 cell m-1" style="height: 500px; background-color: white; overflow: scroll">
             {% include 'table.html' %}
         </div>
-        <div class="vis-input col-md-2" style="position: relative; top :30px">
+    </div>
+    <div class="row">
+        <div class="vis-input col-md-12" style="position: relative;">
             <form action="/exec/viewer" method="POST">
                 {% csrf_token %}
-                <div class=" row" style="color: white; font-size: 16px; ">
-                    <div class="col-md-12 mt-1">
-                        <div class="form-group">
-                            <label for="Variable" >Choose Variable: </label>
-                            <select name="varname" id="" style="background-color: #c4c4c4;">
-                                {% for var in varlist %}
-                                    {% if var == cell.data.varname %}
-                                    <option value="{{ var }}" selected>{{ var }}</option>
-                                    {% else %}
-                                    <option value="{{ var }}">{{ var }} </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
+                <div class="col-md-6">
+                <div class="form-group row">
+                    <label for="Variable" class="col-sm-3">Variable Name</label>
+                    <select name="varname" id="" class="form-control col-sm-4">
+                        {% for var in varlist %}
+                            {% if var == cell.data.varname %}
+                            <option value="{{ var }}" selected>{{ var }}</option>
+                            {% else %}
+                            <option value="{{ var }}">{{ var }} </option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
                 </div>
-                <input type="hidden" name="cellname" value="{{ cell.name }}" id="{{ cell.name }}">
-                <button type="submit" class="btn btn-light"> Show </button>
+                </div>
+            <div class="col-md-6">
+                <div class="row">
+                <label for="view-type" class="col-4"> Formatted </label>
+                <input type="checkbox" name="check" style="height: 20px; width: 20px;" checked> 
+                
+            </div>
+            </div>
+            <div class="col-md-12 m-3">
+                <div class="row ">
+                    <input type="hidden" value="{{ cell.name }}" name="cellname">
+                    <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;" class="btn col-md-2"> Show </button>
+                </div>
+            </div>
             </form>
-            <label for="view-type"> Formatted </label>
-            <input type="checkbox" name="check" checked> 
-        </div>
-
     </div>
-    <hr>
+
+
+</div>
+<hr>
 </div>
