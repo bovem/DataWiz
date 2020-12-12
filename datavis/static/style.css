@@ -1,5 +1,5 @@
 body {
-    background-color: #f8f8f8;
+    background-color: #010506;
 }
 
 .dz {
@@ -13,10 +13,19 @@ body {
 }
 
 .cell {
+    /*background-color: black;*/
     border-style: solid !important;
-    border-color: black !important;
+    border-color: orange !important;
     border-width: 1px !important;
     
+}
+
+ label{
+    color: white;
+}
+
+h5{
+    color: white;
 }
 
 .outer-cell {
