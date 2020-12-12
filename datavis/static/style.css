@@ -29,8 +29,8 @@ h5, h3{
 }
 
 .outer-cell {
-    background-color:white;
-    color: white;
+    color:#010506;
+    border-color: orange;
 }
 
 .btn-dark {

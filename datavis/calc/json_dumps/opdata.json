@@ -1,1 +1,1 @@
-[]
+[{"type": "cleaner.html", "name": "cleaner-0", "data": {"varname": "libor", "new_varname": "hell"}}, {"type": "show.html", "name": "show-0", "data": {"varname": "libor"}}, {"type": "visualiser.html", "name": "visualiser-0", "data": {}}, {"type": "exporter.html", "name": "exporter-0", "data": {}}]
