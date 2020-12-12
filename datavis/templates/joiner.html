@@ -1,11 +1,19 @@
-<div class="cell m-2 " style=" background-color:#868484;">
+<div class="cell m-2 outer-cell">
     <div class="row m-2">
         <div class="col-md-12 ">
-            <form action="/exec/joiner" method="POST" style="display: flex; justify-content: space-between">
+            <h3>Data Joiner</h3>
+            <hr>
+
+
+
+            <div class="row">
+                <div class="col-8">
+            <form action="/exec/joiner" method="POST" >
                 {% csrf_token %}
-                <div style="display: inline;">
-                    <label for="varname-exporter">Choose Variable: </label>
-                    <select name="varname" id="varname-exporter" class="input-bg">
+<div class="form-group row">
+                <label for="varname-exporter" class="col-sm-3">Variable 1 </label>
+
+                    <select class="col-sm-4" name="varname" id="varname-exporter" class="input-bg">
                         {% for var in varlist %}
                             {% if var == cell.data.varname %}
                             <option value="{{ var }}" selected>{{ var }}</option>
@@ -14,29 +22,41 @@
                             {% endif %}
                         {% endfor %}
                     </select>
+
                 </div>
-                <div style="display: inline;">
-                    <label for="varname-exporter">Choose Variable: </label>
-                    <select name="varname-2" id="varname-exporter" class="input-bg">
-                        {% for var in varlist %}
-                        {% if var == cell.data.varname2 %}
-                        <option value="{{ var }}" selected>{{ var }}</option>
-                        {% else %}
-                        <option value="{{ var }}">{{ var }}</option>
-                        {% endif %}
-                        {% endfor %}
-                    </select>
+                <div class="form-group row">
+                    <label for="varname-2" class="col-sm-3">Variable 2 </label>
+    
+                        <select class="col-sm-4" name="varname" id="varname-exporter" class="input-bg">
+                            {% for var in varlist %}
+                            {% if var == cell.data.varname2 %}
+                            <option value="{{ var }}" selected>{{ var }}</option>
+                            {% else %}
+                            <option value="{{ var }}">{{ var }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+    
+                    </div>
+            </div>
+                <div class="col-4">
+                    <div class="form-group row">
+                        <label for="filename" class="col-sm-6">New Variable Name</label>
+                        <input type="text" placeholder="" value="{{ cell.data.new_varname }}"
+                            name="new_varname" class="col-sm-4">
+                    </div>
+                    <div class="row">
+
+                            <input type="hidden" value="{{ cell.name }}" name="cellname">
+                            <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
+                            class="btn col-8 offset-1">Join</button>
+                    </div>
                 </div>
-                <div style="display: inline;">
-                    <label for="filename"></label>
-                    <input type="text" placeholder="New Variable Name" value="{{ cell.data.new_varname }}"
-                        name="new_varname">
-                </div>
-                <div>
-                    <input type="hidden" value="{{ cell.name }}" name="cellname">
-                    <button type="submit">Join</button>
-                </div>
+
             </form>
+
+        </div>
         </div>
     </div>
+    <hr>
 </div>
