@@ -132,8 +132,8 @@ def transformer(request):
     dump_to_json(opdata, 'opdata')
     var_dict = load_pkl('vardict')
     p = Processor(var_dict)
-    if operation == 'one-hot-encoding':
-        p.onehotencoder(varname, col_name, True, new_varname)
+    if operation == 'label-encoding':
+        p.label_encoder(varname, col_name, True, new_varname)
     elif operation == 'normalizer':
         p.normalize(varname, col_name, True, new_varname)
     elif operation == 'standardizer':

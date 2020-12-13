@@ -15,6 +15,8 @@ class Loader():
 
     def load_html(self, data, data_name):
         df = pd.read_html(data)
+        if type(df) == list:
+           df = df[0]
         self.vardict.add(df, data_name, "df")
 
     def load_hdf(self, data, data_name):
