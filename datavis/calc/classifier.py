@@ -1,15 +1,15 @@
 from .utils import find_in_vardict
 from .var_dict import VarDict
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_score
-from sklearn.linear_model import LinearRegression
-from sklearn.svm import SVR
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.neighbors import KNeighborsRegressor
+from sklearn.svm import SVC
 import numpy as np
 import pandas as pd
 
-class Regressor():
+class Classifier():
     def __init__(self, var_name, target, vardict=VarDict()):
         self.vardict = vardict
         self.model = None
@@ -18,23 +18,23 @@ class Regressor():
         # print(self.features)
         self.target = self.var[target].values
     
-    def linear_regressor(self):
-        self.model = LinearRegression()
+    def knn_classifier(self):
+        self.model = KNeighborsClassifier()
+
+    def decision_tree_classifier(self):
+        self.model = DecisionTreeClassifier()
+
+    def random_forest_classifier(self):
+        self.model = RandomForestClassifier()
     
-    def support_vector_regressor(self):
-        self.model = SVR()
+    def logistic_classifier(self):
+        self.model = LogisticRegression()
 
-    def decision_tree_regressor(self):
-        self.model = DecisionTreeRegressor()
-
-    def random_forest_regressor(self):
-        self.model = RandomForestRegressor()
-
-    def knn_regressor(self):
-        self.model = KNeighborsRegressor()
+    def svm_classifier(self):
+        self.model = SVC()
 
     def score(self, pred_var_name="_"):
-        csv = cross_val_score(self.model, self.features, self.target, scoring='neg_mean_squared_error', cv=10)
+        csv = cross_val_score(self.model, self.features, self.target, scoring='accuracy', cv=10)
         self.model.fit(self.features, self.target)
         predictions = self.model.predict(self.features)
 
@@ -44,7 +44,7 @@ class Regressor():
 
         self.vardict.add(pred_df, pred_var_name)
 
-        return csv.mean()
+        return np.round(csv.mean()*100, 2)
     
     # TODO: Add best regressor method
     # def best_regressor(self):

@@ -13,6 +13,7 @@ from .var_dict import VarDict
 from .processor import Processor
 from .cleaner import Cleaner
 from .regressor import Regressor
+from .classifier import Classifier
 # from .modules.cleaner import *
 # from .var_dict import VarDict
 
@@ -142,10 +143,11 @@ def transformer(request):
     
     operation_msg = 'Operation \"{}\" has been applied successfully on variable \"{}\" stored in \"{}\"'.format(operation, varname, new_varname)
     set_cell_data(opdata, cell_name, 'msg', operation_msg)
-    dump_to_pkl(p.vardict, 'vardict')
+
     context = getContext()
     context['opdata'] = opdata
     context['currentCell'] = cell_name
+    dump_to_pkl(p.vardict, 'vardict')
     return render(request, 'home.html', context)
 
 def regressor(request):
@@ -173,7 +175,8 @@ def regressor(request):
         p.decision_tree_regressor()
     elif model == 'Random Forest Regression':
         p.random_forest_regressor()
-
+    elif model == 'KNN Regression':
+        p.knn_regressor()
     # elif operation == 'normalizer':
     #     p.normalize(varname, col_name, True, new_varname)
     # elif operation == 'standardizer':
@@ -182,10 +185,49 @@ def regressor(request):
     score = p.score(new_varname)
     operation_msg = 'Mean Squared Error of \"{}\" model with target column \"{}\" in variable \"{}\" is {}'.format(model, col_name, varname, score)
     set_cell_data(opdata, cell_name, 'msg', operation_msg)
-    dump_to_pkl(p.vardict, 'vardict')
+
     context = getContext()
     context['opdata'] = opdata
     context['currentCell'] = cell_name
+    dump_to_pkl(p.vardict, 'vardict')
+    return render(request, 'home.html', context)
+
+def classifier(request):
+    varname = request.POST['varname']
+    new_varname = request.POST['new_varname']
+    col_name = request.POST['col_name']
+    model = request.POST['model']
+    cell_name = request.POST['cellname']
+
+    opdata = load_json('opdata')
+
+    set_cell_data(opdata, cell_name, 'varname', varname)
+    set_cell_data(opdata, cell_name, 'new_varname', new_varname)
+    set_cell_data(opdata, cell_name, 'col_name', col_name)
+    # set_cell_data(opData, cell_name, 'operation', operation)
+
+    dump_to_json(opdata, 'opdata')
+    var_dict = load_pkl('vardict')
+    p = Classifier(varname,col_name, var_dict)
+    if model == 'KNN Classification':
+        p.knn_classifier()
+    elif model == 'SVM Classification':
+        p.svm_classifier()
+    elif model == 'Decision Tree Classification':
+        p.decision_tree_classifier()
+    elif model == 'Random Forest Classification':
+        p.random_forest_classifier()
+    elif model == 'Logistic Classification':
+         p.logistic_classifier()
+    
+    score = p.score(new_varname)
+    operation_msg = 'Accuracy of \"{}\" model with target column \"{}\" in variable \"{}\" is {}%'.format(model, col_name, varname, score)
+    set_cell_data(opdata, cell_name, 'msg', operation_msg)
+
+    context = getContext()
+    context['opdata'] = opdata
+    context['currentCell'] = cell_name
+    dump_to_pkl(p.vardict, 'vardict')
     return render(request, 'home.html', context)
 
 def viewer(request):
@@ -193,7 +235,7 @@ def viewer(request):
     cellname = request.POST['cellname']
     vardict = load_pkl('vardict')
     if var_name != None:
-        df = find_in_vardict(vardict, var_name)['data']
+        df = find_in_vardict(vardict, var_name)['data'].sample(20)
         df = df.reset_index()
         opdata = load_json('opdata')
         set_cell_data(opdata, cellname, 'varname', var_name)
@@ -311,6 +353,10 @@ def addRegressor(request):
     addCell('regressor')
     return redirect('/')
 
+def addClassifier(request):
+    addCell('classifier')
+    return redirect('/')
+
 def addExporter(request):
     addCell('exporter')
     return redirect('/')
@@ -320,7 +366,10 @@ def resetAll(request):
     vardict = VarDict()
     dump_to_pkl(vardict, 'vardict')
     opdata = []
-    dump_to_json(opdata, 'opdata')
+    try:
+        dump_to_json(opdata, 'opdata')
+    except Exception as e:
+        print(e)
     context = {}
     context['headers'] = {}
     context['data'] = {}
