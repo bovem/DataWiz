@@ -9,8 +9,6 @@
   <!-- Bootstrap 4 -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css">
-  <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
   
   <!-- Adding Icons Library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -25,9 +23,13 @@
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
   <!-- Libarary for Viewing Tables -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js">
-  </script>
+  </script> -->
+
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css">
+  <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
+  
 
   <!-- <link rel="stylesheet" href="{% static 'jquery.dataTables.css '%}">
     <script src="{% static 'jquery.dataTables.js' %}"></script> -->
@@ -42,43 +44,42 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-dark p-2 sticky-top" style="background-color: #010506;">
-    <a class="navbar-brand" href="#">
-      <img src="{% static 'images/logo.PNG' %}" width="150" height="30" alt="">
-    </a>
-    <div class="dropdown" style=" left:550px; position: relative; background-color:#010506;">
-      <button class="btn btn-dark" type="button" data-toggle="dropdown">
-        <span class="btn-dark">
-          <i class="fa fa-plus icon" aria-hidden="true"></i>
-          <!-- <i class="fa fa-caret-down icon" aria-hidden="true"></i> -->
-        </span>
-      </button>
-      <div class="dropdown-menu" aria-labelledby="add-cell-dropdown">
-        <a class="dropdown-item" href="/add/cleaner">Data Cleaner</a>
-        <a class="dropdown-item" href="/add/transformer">Data Transformer</a>
-        <a class="dropdown-item" href="/add/joiner">Data Joiner</a>
-        <a class="dropdown-item" href="/add/visualiser">Data Visualiser</a>
-        <a class="dropdown-item" href="/add/viewer">Data Viewer</a>
-        <a class="dropdown-item" href="/add/exporter">Data Exporter</a>
+  <div>
+    <nav class="navbar navbar-dark p-2 sticky-top" style="background-color: #010506;">
+      <a class="navbar-brand" href="#">
+        <img src="{% static 'images/logo.PNG' %}" width="150" height="30" alt="">
+      </a>
+      <div class="dropdown" style=" position:relative; float:right; padding-right:85px; background-color:#010506;">
+        <button class="btn btn-dark" type="button"  data-toggle="dropdown">
+          <span class="btn-dark">
+            <i class="fa fa-plus icon" aria-hidden="true"></i>
+            <!-- <i class="fa fa-caret-down icon" aria-hidden="true"></i> -->
+          </span>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="add-cell-dropdown">
+          <a class="dropdown-item" href="/add/cleaner">Data Cleaner</a>
+          <a class="dropdown-item" href="/add/transformer">Data Transformer</a>
+          <a class="dropdown-item" href="/add/joiner">Data Joiner</a>
+          <a class="dropdown-item" href="/add/visualiser">Data Visualiser</a>
+          <a class="dropdown-item" href="/add/viewer">Data Viewer</a>
+          <a class="dropdown-item" href="/add/exporter">Data Exporter</a>
+        </div>
+        
+        <!-- <button class="btn btn-dark" type="button">
+          <i class="fa fa-download icon" aria-hidden="true"></i>
+        </button> -->
+        <button class="btn btn-dark" type="button" id="reset-button" onclick="confirmReset()" data-toggle="tooltip"
+          data-placement="bottom" title="Reset Workspace">
+          <i class="fa fa-minus-circle icon"></i>
+          <!-- <i class="fa fa-caret-down" aria-hidden="true" style="color: gray; font-size:22px ;"></i> -->
+        </button>
       </div>
+  
+  
+  
+    </nav>
 
-      <!-- <button class="btn btn-dark" type="button">
-        <i class="fa fa-download icon" aria-hidden="true"></i>
-      </button> -->
-      <button class="btn btn-dark" type="button" id="reset-button" onclick="confirmReset()" data-toggle="tooltip"
-        data-placement="bottom" title="Reset Workspace">
-        <i class="fa fa-minus-circle icon"></i>
-        <!-- <i class="fa fa-caret-down" aria-hidden="true" style="color: gray; font-size:22px ;"></i> -->
-      </button>
-    </div>
-
-    <div>
-
-    </div>
-
-
-
-  </nav>
+  </div>
   <div class="container">
     {% block content %}
     {% endblock content %}
