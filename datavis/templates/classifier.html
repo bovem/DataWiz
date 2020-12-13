@@ -1,0 +1,79 @@
+<div class="cell m-2 outer-cell">
+    <form action="/exec/classifier" method="POST" class="form">
+        {% csrf_token %}
+        <div class="row m-2">
+            <div class="col-md-12">
+                <h3>Classifier</h3>
+                <hr>
+                <div class="row">
+                    <div class="col-8 ">
+
+                        <div class="form-group row">
+                            <label for="Variable" class="col-sm-3">Variable </label>
+                            <select name="varname" id="" class="form-control col-sm-4">
+                                {% for var in varlist %}
+                                {% if var == cell.data.varname %}
+                                <option value="{{ var }}" selected>{{ var }}</option>
+                                {% else %}
+                                <option value="{{ var }}">{{ var }} </option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label for="clean-operation" class="col-sm-3">Model</label>
+                            <select class="form-control col-sm-4" id="ml-regressor" name="model">
+                                <option value="KNN Classification">KNN</option>
+                                <option value="SVM Classification">SVM Classification</option>
+                                <option value="Decision Tree Classification">Decision Tree</option>
+                                <option value="Random Forest Classification">Random Forest</option>
+                                <option value="Logistic Classification">Logistic</option>
+                                <!-- <option value="noramlizer">Normalizer</option>
+                                <option value="standardizer">Standardizer</option> -->
+                            </select>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="col-name" class="col-sm-3">Target Column</label>
+                            <input class="form-control col-sm-4" type="text" name="col_name"
+                                value="{{ cell.data.col_name }}" placeholder="" required>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="new-varname" class="col-sm-3">New Variable Name</label>
+                            <input class="form-control col-sm-4" type="text" name="new_varname" placeholder=""
+                                value="{{ cell.data.new_varname }}" required>
+                        </div>
+
+
+                    </div>
+                    <div class="col-4">
+                        <div class="row">
+                            <input type="hidden" value="{{ cell.name }}" name="cellname">
+
+
+
+                            <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
+                                class="btn col-6 offset-4">Score model</button>
+                            <!-- <p style="color: green;">{{ cell.data.msg }}</p> -->
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label>Logs</label>
+                        <div style="background-color: white; height: 25px;">
+
+                            <p style="color: green; margin: 1px;">{{ cell.data.msg }}</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <hr>
+</div>
