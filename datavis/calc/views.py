@@ -165,8 +165,15 @@ def regressor(request):
     dump_to_json(opdata, 'opdata')
     var_dict = load_pkl('vardict')
     p = Regressor(varname,col_name, var_dict)
-    if model == 'linear-regression':
+    if model == 'Linear Regression':
         p.linear_regressor()
+    elif model == 'SVM Regression':
+        p.support_vector_regressor()
+    elif model == 'Decision Tree Regression':
+        p.decision_tree_regressor()
+    elif model == 'Random Forest Regression':
+        p.random_forest_regressor()
+
     # elif operation == 'normalizer':
     #     p.normalize(varname, col_name, True, new_varname)
     # elif operation == 'standardizer':
