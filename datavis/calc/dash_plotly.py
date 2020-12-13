@@ -11,8 +11,7 @@ from . import utils
 from .visualiser import Visualiser
 
 app = DjangoDash('Graph', external_stylesheets=[
-                 dbc.themes.BOOTSTRAP], add_bootstrap_links=True)
-
+                  dbc.themes.BOOTSTRAP], add_bootstrap_links=True, hot_reload=True)
 
 vardict = utils.load_pkl('vardict')
 if vardict != None:
@@ -83,10 +82,8 @@ input_varname = dbc.Row(dbc.Col(
         [
             dbc.Label("Variable"),
             dcc.Dropdown(
-                id='varname-visualiser',
-                options=[
-                    {"label": var, "value": var} for var in varList
-                ],
+                id='varname_visualiser',
+                options=[],
                 # value="x-axis"
             ),
         ]
@@ -139,7 +136,7 @@ app.layout = dbc.Row(
 @app.callback(
     [Output("x-axis", "options"),
      Output("y-axis", "options")],
-    [Input("varname-visualiser", "value")]
+    [Input("varname_visualiser", "value")]
 )
 def update_cols(varname):
     col_list = vis_obj.get_columns(varname)
@@ -147,6 +144,20 @@ def update_cols(varname):
     options = [{"label": col, "value": col} for col in col_list]
 
     return options, options
+
+@app.callback(
+    Output("varname_visualiser", "options"),
+    [Input("plot-type", "value")]
+)
+def update_vars(plot_type):
+    vardict = utils.load_pkl('vardict')
+    if vardict != None:
+        varList = vardict.get_var_list()
+    else:
+        varList = []
+
+    options = [{"label": var, "value": var} for var in varList]
+    return options
 
 
 @app.callback(
@@ -158,7 +169,7 @@ def update_cols(varname):
         Input("y-label", "value"),
         Input("plot-type", "value"),
         Input("title-visualiser", "value"),
-        Input('varname-visualiser', "value")
+        Input('varname_visualiser', "value")
     ]
 )
 def make_graph(x, y, xlabel, ylabel, plot_type, gtitle, varname):

@@ -1,11 +1,19 @@
 {% load custom_templates %}
 <div class="table-div">
 
-    <table class="table table-checked" ">
+    <table class="table" 
+        data-pagination="true"
+        data-search="true" 
+        data-toggle="table"
+        data-show-columns="true"
+        data-show-fullscreen="true"
+        data-pagination="true"
+        data-sortable="true"
+        style="width: 100%;">
         <thead>
             <tr>
                 {% for header in headers|lookup:cell.name %}
-                <th>{{ header }}</th>
+                <th data-field="{{ header }}" data-sortable="true">{{ header }}</th>
                 {% endfor %}
             </tr>
         </thead>
@@ -26,7 +34,7 @@
 </div>
 
 
-<div class=" array-div">
+<div class=" array-div" style="display: none;">
         [{{ headers|lookup:cell.name }}
         {% for row in data|lookup:cell.name %}
         <div>
