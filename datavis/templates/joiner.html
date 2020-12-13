@@ -1,4 +1,6 @@
 <div class="cell m-2 outer-cell">
+    <form action="/exec/joiner" method="POST">
+        {% csrf_token %}
     <div class="row m-2">
         <div class="col-md-12 ">
             <h3>Data Joiner</h3>
@@ -8,8 +10,7 @@
 
             <div class="row">
                 <div class="col-8">
-                    <form action="/exec/joiner" method="POST">
-                        {% csrf_token %}
+
                         <div class="form-group row">
                             <label for="varname-exporter" class="col-sm-3">Variable 1 </label>
 
@@ -27,7 +28,7 @@
                         <div class="form-group row">
                             <label for="varname-2" class="col-sm-3">Variable 2 </label>
 
-                            <select class="col-sm-4" name="varname" id="varname-exporter" class="input-bg">
+                            <select class="col-sm-4" name="varname2" id="varname-exporter" class="input-bg">
                                 {% for var in varlist %}
                                 {% if var == cell.data.varname2 %}
                                 <option value="{{ var }}" selected>{{ var }}</option>
@@ -45,6 +46,13 @@
                         <input type="text" placeholder="" value="{{ cell.data.new_varname }}" name="new_varname"
                             class="col-sm-4">
                     </div>
+                    <div class="form-group row">
+                        <label for="jointype" class="col-sm-6">Jointype</label>
+                        <select class="form-control col-sm-4" name="jointype">
+                            <option value="horizontal">Horizontal</option>
+                            <option value="vertical">Vertical</option>
+                        </select>
+                    </div>
                     <div class="row">
 
                         <input type="hidden" value="{{ cell.name }}" name="cellname">
@@ -53,10 +61,21 @@
                     </div>
                 </div>
 
-                </form>
 
+
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <label>Logs</label>
+                    <div style="background-color: white; height: 25px;">
+
+                        <p style="color: green; margin: 1px;">{{ cell.data.msg }}</p>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</form>
     <hr>
 </div>

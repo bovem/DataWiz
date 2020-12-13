@@ -11,7 +11,7 @@ class Exporter():
             filename = var_name
         return var_data.to_csv('./media/downloads/'+filename+'.csv')
     
-    def export_json(self, var_name, filename="", orient="index"):
+    def export_json(self, var_name, filename="", orient="records"):
         var_data = find_in_vardict(self.vardict, var_name)["data"]
         if(filename == ""):
             filename = var_name
