@@ -2,3 +2,5 @@
 *.xlsx
 *.json
 *.pyc
+context
+vardict
