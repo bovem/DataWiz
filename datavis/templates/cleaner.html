@@ -1,14 +1,15 @@
 {% load static %}
 
 <div class="cell m-2 outer-cell">
-    <div class="row m-2">
-        <div class="col-md-12">
-            <h3>Data Cleaner</h3>
-            <hr>
-            <div class="row">
-                <div class="col-6 ">
-                    <form action="/exec/cleaner" class="form" method="POST">
-                        {% csrf_token %}
+    <form action="/exec/cleaner" class="form" method="POST">
+        {% csrf_token %}
+        <div class="row m-2">
+            <div class="col-md-12">
+                <h3>Data Cleaner</h3>
+                <hr>
+                <div class="row">
+                    <div class="col-6 ">
+
                         <div class="form-group row">
                             <label for="varname" class="col-sm-3">Variable Name</label>
                             <select name="varname" id="" class="form-control col-sm-4"
@@ -34,38 +35,38 @@
                                 <option value="fill-median">Fill Median </option>
                             </select>
                         </div>
-                </div>
-                <div class="col-6">
-
-
-                    <div class="form-group row">
-                        <label for="new_varname" class="col-4">New Variable Name</label>
-                        <input class="form-control col-4" type="text" value="{{ cell.data.new_varname|default:'' }}"
-                            name="new_varname" placeholder="">
                     </div>
-                    <!-- use this as a unique cell identifier -->
-                    <input type="hidden" value="{{ cell.name }}" name="cellname">
+                    <div class="col-6">
 
-                    <div class="row">
-                        <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
-                            class="btn col-4 offset-4">Apply Operation</button>
-                        <!-- <p style="color: green;"></p> -->
+
+                        <div class="form-group row">
+                            <label for="new_varname" class="col-4">New Variable Name</label>
+                            <input class="form-control col-4" type="text" value="{{ cell.data.new_varname|default:'' }}"
+                                name="new_varname" placeholder="">
+                        </div>
+                        <!-- use this as a unique cell identifier -->
+                        <input type="hidden" value="{{ cell.name }}" name="cellname">
+
+                        <div class="row">
+                            <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
+                                class="btn col-4 offset-4">Apply Operation</button>
+                            <!-- <p style="color: green;"></p> -->
+                        </div>
+
                     </div>
-
                 </div>
-            </div>
-            <div class="row" >
-                <div class="col-12">
-                <label >Logs</label>
-                <div style="background-color: white; height: 25px;">
+                <div class="row">
+                    <div class="col-12">
+                        <label>Logs</label>
+                        <div style="background-color: white; height: 25px;">
 
-                <p style="color: green; margin: 1px;">{{ cell.data.msg }}</p>
+                            <p style="color: green; margin: 1px;">{{ cell.data.msg }}</p>
 
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-            </div>
-        </div>
-    </div>
-</form>
+    </form>
     <hr>
 </div>

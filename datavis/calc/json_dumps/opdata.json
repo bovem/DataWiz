@@ -1,1 +1,1 @@
-[{"type": "visualiser.html", "name": "visualiser-0", "data": {}}, {"type": "show.html", "name": "show-0", "data": {"varname": "housing_data"}}, {"type": "cleaner.html", "name": "cleaner-0", "data": {"varname": "comtrade", "new_varname": "newlibor"}}]
+[{"type": "transformer.html", "name": "transformer-0", "data": {}}, {"type": "joiner.html", "name": "joiner-0", "data": {}}, {"type": "visualiser.html", "name": "visualiser-0", "data": {}}, {"type": "show.html", "name": "show-0", "data": {}}, {"type": "exporter.html", "name": "exporter-0", "data": {}}]
