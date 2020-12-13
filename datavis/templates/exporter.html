@@ -1,0 +1,53 @@
+<div class="cell m-2 outer-cell">
+    <div class="row m-2">
+        <div class="col-md-12 ">
+            <h3>Data Exporter</h3>
+            <hr>
+            <div class="row">
+                <div class="col-8">
+                    <form action="/exec/exporter" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label for="varname-exporter" class="col-sm-3">Variable </label>
+
+                            <select class="col-sm-4" name="varname" id="varname-exporter" class="input-bg">
+                                {% for var in varlist %}
+                                {% if var == cell.data.varname %}
+                                <option value="{{ var }}" selected>{{ var }}</option>
+                                {% else %}
+                                <option value="{{ var }}">{{ var }}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+
+                        </div>
+                        <div class="form-group row">
+                            <label for="filename" class="col-sm-3">File Name</label>
+                            <input type="text" placeholder="" name="filename" value="{{ cell.data.filename }}"
+                                class="col-sm-4">
+                        </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group row">
+                        <label for="file-type" class="col-sm-4">File Type</label>
+                        <select name="filetype" class="input-bg col-sm-4">
+                            <option value="csv">CSV</option>
+                            <option value="json">JSON</option>
+                            <option value="html">HTML</option>
+                            <option value="xlsx">EXCEL</option>
+                            <!-- <option value="jso"></option> -->
+                        </select>
+                    </div>
+                    <div class="row">
+                        <input type="hidden" value="{{ cell.name }}" name="cellname">
+                        <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
+                            class="btn col-8">Download</button>
+                    </div>
+                </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

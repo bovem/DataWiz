@@ -1,0 +1,72 @@
+{% load static %}
+
+<div class="cell m-2 outer-cell">
+    <form action="/exec/cleaner" class="form" method="POST">
+        {% csrf_token %}
+        <div class="row m-2">
+            <div class="col-md-12">
+                <h3>Data Cleaner</h3>
+                <hr>
+                <div class="row">
+                    <div class="col-6 ">
+
+                        <div class="form-group row">
+                            <label for="varname" class="col-sm-3">Variable Name</label>
+                            <select name="varname" id="" class="form-control col-sm-4"
+                                value='{{ cell.data.varname|default:"" }}'>
+                                {% for var in varlist %}
+                                {% if var == cell.data.varname %}
+                                <option value="{{ var }}" selected>{{ var }}</option>
+                                {% else %}
+                                <option value="{{ var }}">{{ var }} </option>>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group row">
+
+                            <label for="operation-cleaner" class="col-sm-3">Operation</label>
+                            <!-- add this list from server to save its state -->
+                            <select class="form-control col-sm-4" id="operation-cleaner" name="operation">
+                                <option value="remove-null-value">Drop Null Values</option>
+                                <option value="fill-forward">Fill Forward</option>
+                                <option value="fill-mean">Fill Mean</option>
+                                <option value="fill-backward">Fill Backward</option>
+                                <option value="fill-median">Fill Median </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+
+
+                        <div class="form-group row">
+                            <label for="new_varname" class="col-4">New Variable Name</label>
+                            <input class="form-control col-4" type="text" value="{{ cell.data.new_varname|default:'' }}"
+                                name="new_varname" placeholder="">
+                        </div>
+                        <!-- use this as a unique cell identifier -->
+                        <input type="hidden" value="{{ cell.name }}" name="cellname">
+
+                        <div class="row">
+                            <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
+                                class="btn col-4 offset-4">Apply Operation</button>
+                            <!-- <p style="color: green;"></p> -->
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label>Logs</label>
+                        <div style="background-color: white; height: 25px;">
+
+                            <p style="color: green; margin: 1px;">{{ cell.data.msg }}</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <hr>
+</div>

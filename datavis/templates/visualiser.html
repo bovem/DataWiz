@@ -1,0 +1,65 @@
+<div class="cell m-2 ">
+    <div class="row m-2">
+        <div class="col-md-12 ">
+            <h3>Data Visualizer</h3>
+        </div>
+    </div>
+
+    <div class="row m-2">
+        <div class="col-md-12 mt-3 " style="background-color: white">
+            {% include 'graph.html' %}
+        </div>
+
+        <!-- <div class="vis-input col-md-4" style="position: relative; top :30px">
+            <form action="">
+                {% csrf_token %}
+                <div class=" row" style="color: white; font-size: 16px; ">
+                    <div class="col-md-12 mt-1">
+                        <div class="form-group row">
+                            <label for="Variable" class="col-sm-6">Choose Variable: </label>
+                            <select name="variable" id="" class=" col-sm-5" style="background-color: #c4c4c4;">
+                                {% for var in varlist %}
+                                <option value="{{ var }}">{{ var }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-1">
+                        <div class=" form-group row">
+                            <label for="title" class="mx-2 col-sm-3"> Title </label>
+                            <input type="text" class=" mx-2 col-sm-6" name="title" style="background-color: #c4c4c4">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-1">
+                        <div class=" form-group row">
+                            <label for="xlabel" class="mx-2 col-sm-3"> X-label </label>
+                            <input type="text" class="mx-2 col-sm-6" name="xlabel" style="background-color: #c4c4c4">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-1">
+                        <div class=" form-group row">
+                            <label for="ylabel" class="mx-2 col-sm-3"> Y-label </label>
+                            <input type="text" class="mx-2 col-sm-6" name="ylabel" style="background-color: #c4c4c4">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-1">
+                        <div class="form-group row">
+                            <label for="col-x" class="mx-2 col-md-3">X Axis</label>
+                            <input type="text" class=" mx-2 col-sm-6" name="ylabel" style="background-color: #c4c4c4">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-1">
+                        <div class="form-group row">
+                            <label for="col-y" class="mx-2 col-md-3">Y Axis</label>
+                            <input type="text" class="mx-2 col-sm-6" name="ylabel" style="background-color: #c4c4c4">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div> -->
+
+    </div>
+
+    <hr>
+
+</div>

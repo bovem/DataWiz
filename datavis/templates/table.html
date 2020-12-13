@@ -1,0 +1,44 @@
+{% load custom_templates %}
+<div class="table-div">
+
+    <table class="table" 
+        data-pagination="true"
+        data-search="true" 
+        data-toggle="table"
+        data-show-columns="true"
+        data-show-fullscreen="true"
+        data-pagination="true"
+        data-sortable="true"
+        style="width: 100%;">
+        <thead>
+            <tr>
+                {% for header in headers|lookup:cell.name %}
+                <th data-field="{{ header }}" data-sortable="true">{{ header }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+    
+            {% for row in data|lookup:cell.name %}
+            <tr>
+                {% for val in row %}
+                <td>
+                    {{ val }}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+    
+        </tbody>
+    </table>
+</div>
+
+
+<div class=" array-div" style="display: none;">
+        [{{ headers|lookup:cell.name }}
+        {% for row in data|lookup:cell.name %}
+        <div>
+            {{ row }}
+        </div>
+        {% endfor %}]
+</div>
