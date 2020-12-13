@@ -12,6 +12,7 @@ from .exporter import Exporter
 from .var_dict import VarDict
 from .processor import Processor
 from .cleaner import Cleaner
+from .regressor import Regressor
 # from .modules.cleaner import *
 # from .var_dict import VarDict
 
@@ -147,6 +148,38 @@ def transformer(request):
     context['currentCell'] = cell_name
     return render(request, 'home.html', context)
 
+def regressor(request):
+    varname = request.POST['varname']
+    new_varname = request.POST['new_varname']
+    col_name = request.POST['col_name']
+    model = request.POST['model']
+    cell_name = request.POST['cellname']
+
+    opdata = load_json('opdata')
+
+    set_cell_data(opdata, cell_name, 'varname', varname)
+    set_cell_data(opdata, cell_name, 'new_varname', new_varname)
+    set_cell_data(opdata, cell_name, 'col_name', col_name)
+    # set_cell_data(opData, cell_name, 'operation', operation)
+
+    dump_to_json(opdata, 'opdata')
+    var_dict = load_pkl('vardict')
+    p = Regressor(varname,col_name, var_dict)
+    if model == 'linear-regression':
+        p.linear_regressor()
+    # elif operation == 'normalizer':
+    #     p.normalize(varname, col_name, True, new_varname)
+    # elif operation == 'standardizer':
+    #     p.standardizer(varname, col_name, True, new_varname)
+    
+    score = p.score(new_varname)
+    operation_msg = 'Mean Squared Error of \"{}\" model with target column \"{}\" in variable \"{}\" is {}'.format(model, col_name, varname, score)
+    set_cell_data(opdata, cell_name, 'msg', operation_msg)
+    dump_to_pkl(p.vardict, 'vardict')
+    context = getContext()
+    context['opdata'] = opdata
+    context['currentCell'] = cell_name
+    return render(request, 'home.html', context)
 
 def viewer(request):
     var_name = request.POST['varname']
@@ -267,6 +300,9 @@ def addTransformer(request):
     addCell('transformer')
     return redirect('/')
 
+def addRegressor(request):
+    addCell('regressor')
+    return redirect('/')
 
 def addExporter(request):
     addCell('exporter')

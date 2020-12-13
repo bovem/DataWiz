@@ -1,1 +1,1 @@
-[]
+[{"type": "regressor.html", "name": "regressor-0", "data": {"varname": "crop", "new_varname": "pred", "col_name": "Production"}}, {"type": "show.html", "name": "show-0", "data": {"varname": "pred"}}]
