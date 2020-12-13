@@ -364,6 +364,7 @@ def addExporter(request):
 def resetAll(request):
     # vardict = load_pkl('vardict')
     vardict = VarDict()
+    print("RESETTING WORKSPACE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     dump_to_pkl(vardict, 'vardict')
     opdata = []
     try:

@@ -142,6 +142,8 @@ app.layout = dbc.Row(
     [Input("varname_visualiser", "value")]
 )
 def update_cols(varname):
+    vardict = utils.load_pkl('vardict')
+    vis_obj = Visualiser(vardict)
     col_list = vis_obj.get_columns(varname)
     # print(col_list)
     options = [{"label": col, "value": col} for col in col_list]
@@ -181,6 +183,9 @@ def make_graph(x, y, xlabel, ylabel, plot_type, gtitle, varname):
     x_values = []
     y_values = []
     data_dict = []
+
+    vardict = utils.load_pkl('vardict')
+    vis_obj = Visualiser(vardict)
 
     if (plot_type == 'line' or plot_type == 'bar') and varname != None and x != None and y != None and plot_type != None:
         x_values = vis_obj.get_values(varname, x, 500)
