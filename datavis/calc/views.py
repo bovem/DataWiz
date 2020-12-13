@@ -303,12 +303,12 @@ def joiner(request):
 
     context = getContext()
     context['currentCell'] = cellname
-    context['opdata'] = opdata
 
     operation_msg = 'Variable {} and {} are joined {}ly in {}'.format(varname1, varname2, jointype, new_varname)
     set_cell_data(opdata, cellname, 'msg', operation_msg)
+    context['opdata'] = opdata
 
-    return redirect('/', context)
+    return render(request, 'home.html', context)
 
 
 def show_table(request):
@@ -364,6 +364,7 @@ def addExporter(request):
 def resetAll(request):
     # vardict = load_pkl('vardict')
     vardict = VarDict()
+    print("RESETTING WORKSPACE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     dump_to_pkl(vardict, 'vardict')
     opdata = []
     try:

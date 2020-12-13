@@ -42,22 +42,15 @@
                         </div>
 
 
+                        <input type="hidden" value="{{ cell.name }}" name="cellname">
                     </div>
-                    <div class="col-4">
-                        <div class="row">
-                            <input type="hidden" value="{{ cell.name }}" name="cellname">
-
-
-
-                            <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
-                                class="btn col-6 offset-4">Apply Operation</button>
-                            <!-- <p style="color: green;">{{ cell.data.msg }}</p> -->
-                        </div>
-                    </div>
+                    
 
 
 
                 </div>
+                <button type="submit" style=" position: relative; float:right;  right: 100px; bottom: 55px; background-color:orange;"
+                    class="btn ">Apply Operation</button>
                 <div class="row">
                     <div class="col-12">
                         <label>Logs</label>

@@ -1,0 +1,5 @@
+FROM python:3.7
+WORKDIR /code
+COPY . /code/
+RUN chmod 777 /code/*
+RUN pip3 install dash django django-plotly-dash xlrd==1.2.0 bootstrap4 dash-bootstrap-components pandas numpy scikit-learn django-bootstrap4 dpd-static-support
