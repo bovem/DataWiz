@@ -52,7 +52,7 @@ def load_df(request):
         dump_to_pkl(l.vardict, 'vardict')
 
         context = getContext()
-        context['loaderMsg'] = "File successfully loaded"
+        context['loaderMsg'] = "File \"{}\" has been loaded into variable \"{}\" successfully".format(filename, varName)
         context['currentCell'] = 'loader'
         dump_to_pkl(context, 'context')
         # return render(request, 'home.html', context=context)
@@ -106,7 +106,7 @@ def cleaner(request):
     elif operation == 'fill-backward':
         c.fill_backward(var_name, inplace, new_var_name)
     
-    operation_msg = 'Operation has been applied successfully'
+    operation_msg = 'Operation {} has been applied successfully on variable {} stored in {}'.format(operation, var_name, new_var_name)
     set_cell_data(opdata, cellname, 'msg', operation_msg)
 
     context = getContext()
@@ -139,7 +139,7 @@ def transformer(request):
     elif operation == 'standardizer':
         p.standardizer(varname, col_name, True, new_varname)
     
-    operation_msg = 'Operation has been applied successfully'
+    operation_msg = 'Operation \"{}\" has been applied successfully on variable \"{}\" stored in \"{}\"'.format(operation, varname, new_varname)
     set_cell_data(opdata, cell_name, 'msg', operation_msg)
     dump_to_pkl(p.vardict, 'vardict')
     context = getContext()
@@ -152,9 +152,9 @@ def viewer(request):
     var_name = request.POST['varname']
     cellname = request.POST['cellname']
     vardict = load_pkl('vardict')
-    print(cellname)
     if var_name != None:
         df = find_in_vardict(vardict, var_name)['data']
+        df = df.reset_index()
         opdata = load_json('opdata')
         set_cell_data(opdata, cellname, 'varname', var_name)
         header = [col for col in df.columns]
@@ -200,7 +200,8 @@ def exporter(request):
 
 def joiner(request):
     varname1 = request.POST.get('varname')
-    varname2 = request.POST.get('varname-2')
+    varname2 = request.POST.get('varname2')
+    jointype = request.POST.get('jointype')
     new_varname = request.POST.get('new_varname')
     cellname = request.POST.get('cellname')
 
@@ -212,11 +213,20 @@ def joiner(request):
     setContext('cellname', cellname)
     vardict = load_pkl('vardict')
     c = Cleaner(vardict)
-    c.joiner(varname1, varname2, True,new_varname)
+    c.joiner(varname1, varname2, jointype, True,new_varname)
     dump_to_pkl(c.vardict,'vardict')
     dump_to_json(opdata, 'opdata')
+    
 
-    return redirect('/')
+
+    context = getContext()
+    context['currentCell'] = cellname
+    context['opdata'] = opdata
+
+    operation_msg = 'Variable {} and {} are joined {}ly in {}'.format(varname1, varname2, jointype, new_varname)
+    set_cell_data(opdata, cellname, 'msg', operation_msg)
+
+    return redirect('/', context)
 
 
 def show_table(request):

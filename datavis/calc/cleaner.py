@@ -81,14 +81,23 @@ class Cleaner():
             # print()
             #print("Size after dropping nulls: {}".format(var["data"].shape))
 
-    def joiner(self, var_name, var_name2, new_var=False, new_var_name=""):
+    def joiner(self, var_name, var_name2, jointype='vertical', new_var=False, new_var_name=""):
         if (check_for_df(self.vardict, var_name) and check_for_df(self.vardict, var_name)):
             var = find_in_vardict(self.vardict, var_name)
             var2 = find_in_vardict(self.vardict, var_name2)
+
             if new_var:
-                self.vardict.add(var["data"].join(var2["data"], lsuffix="_{}".format(var_name),
-                                                  rsuffix="_{}".format(var_name2)), new_var_name)
-                print("Created Variable name: {}".format(new_var_name))
+                if jointype=='horizontal':
+                    other_cols = [col for col in list(var2["data"].columns) if col not in list(var["data"].columns)]
+                    data = var["data"].join(var2["data"][other_cols], lsuffix="_{}".format(var_name),
+                                                    rsuffix="_{}".format(var_name2))
+
+                    self.vardict.add(data, new_var_name)
+                    print("Created Variable name: {}".format(new_var_name))
+                elif jointype=='vertical':
+                    data = var['data'].append(var2['data'])
+                    self.vardict.add(data, new_var_name)
+                    print("Created Variable name: {}".format(new_var_name))
             else:
                 var["data"] = var["data"].join(var2["data"], lsuffix="_{}".format(var_name),
                                                rsuffix="_{}".format(var_name2))

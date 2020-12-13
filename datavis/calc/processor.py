@@ -20,10 +20,10 @@ class Processor():
         else:
             var_data = var["data"].select_dtypes(include=['float64', 'int64'])
 
-        scaled_data_values = scale.fit_transform([var_data.values])
-        scaled_data = var
+        scaled_data_values = scale.fit_transform(np.array(var_data.values).reshape(-1, 1))
+        scaled_data = var['data']
         scaled_data['{}_Scaled'.format(col_name)] = scaled_data_values
-        self.vardict.add(scaled_data, new_var_name)
+        self.vardict.add(scaled_data.round(2), new_var_name)
 
     def normalize(self, var_name, col_name, new_var=True, new_var_name="_"):
         if((new_var==True) and (new_var_name=="_")):
@@ -36,10 +36,11 @@ class Processor():
             var_data = var["data"][col_name]
         else:
             var_data = var["data"].select_dtypes(include=['float64', 'int64'])
-        scaled_data_values = scale.fit_transform(var_data.values)
-        scaled_data = var
+
+        scaled_data_values = scale.fit_transform(np.array(var_data.values).reshape(-1, 1))
+        scaled_data = var['data']
         scaled_data['{}_Normalized'.format(col_name)] = scaled_data_values
-        self.vardict.add(scaled_data, new_var_name)
+        self.vardict.add(scaled_data.round(2), new_var_name)
     
     # def onehotencoder(self, var_name, col_name, new_var=True, new_var_name="_"):
     #     if((new_var==True) and (new_var_name=="_")):
