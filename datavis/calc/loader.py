@@ -14,7 +14,7 @@ class Loader():
         self.vardict.add(df, data_name, "df")
 
     def load_html(self, data, data_name):
-        df = pd.read_html(data)
+        df = pd.read_html(data, index_col=0)
         if type(df) == list:
            df = df[0]
         self.vardict.add(df, data_name, "df")
