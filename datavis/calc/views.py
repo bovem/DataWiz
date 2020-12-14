@@ -83,9 +83,9 @@ def cleaner(request):
     cellname = request.POST['cellname']
     var_name = request.POST['varname']
     new_var_name = request.POST['new_varname']
-    inplace = False
+    inplace = True
     if new_var_name == None or new_var_name == '':
-        inplace = True
+        inplace = False
 
     
     opdata = load_json('opdata')
@@ -114,7 +114,7 @@ def cleaner(request):
     context = getContext()
     context['currentCell'] = cellname
     context['opdata'] = opdata
-
+    dump_to_pkl(c.vardict, 'vardict')
     return render(request, 'home.html', context)
 
 def transformer(request):
