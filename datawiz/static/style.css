@@ -1,0 +1,54 @@
+body {
+    background-color: #FFFFFF;
+}
+
+.dz {
+    /* border: dashed ; */
+    border-color: black;
+    border-radius: 10px ;
+}
+
+.dz:hover {
+    background-color: #EB3F3F ;
+}
+
+.cell {
+    /*background-color: black;*/
+    border-style: solid !important;
+    border-color: black !important;
+    border-width: 2px !important;
+    border-radius: 10px;
+    
+}
+
+ label{
+    color: black;
+}
+
+h5, h3{
+    color: black;
+}
+
+.outer-cell {
+    color:#010506;
+    border-color: #EB3F3F;
+}
+
+.btn-dark {
+    background-color: white;
+    border-color: black;
+}
+
+.input-bg {
+    background-color: #c4c4c4;
+}
+
+.icon {
+    color: black !important; 
+    font-size:22px !important;
+}
+
+svg {
+    width: unset;
+    height: unset;
+}
