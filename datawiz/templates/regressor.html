@@ -3,13 +3,13 @@
         {% csrf_token %}
         <div class="row m-2">
             <div class="col-md-12">
-                <h3>Regressor</h3>
-                <hr>
+                <h4><b>REGRESSOR</b></h4>
+                <hr style="border-color: white;">
                 <div class="row">
-                    <div class="col-8 ">
+                    <div class="col-6 ">
 
                         <div class="form-group row">
-                            <label for="Variable" class="col-sm-3">Variable </label>
+                            <label for="Variable" class="col-sm-4">Variable</label>
                             <select name="varname" id="" class="form-control col-sm-4">
                                 {% for var in varlist %}
                                 {% if var == cell.data.varname %}
@@ -21,7 +21,7 @@
                             </select>
                         </div>
                         <div class="form-group row">
-                            <label for="clean-operation" class="col-sm-3">Model</label>
+                            <label for="clean-operation" class="col-sm-4">Model</label>
                             <select class="form-control col-sm-4" id="ml-regressor" name="model">
                                 <option value="Linear Regression">Linear Regression</option>
                                 <option value="SVM Regression">SVM Regression</option>
@@ -32,48 +32,47 @@
                                 <option value="standardizer">Standardizer</option> -->
                             </select>
                         </div>
+                    </div>
+
+                    <div class="offset-1 col-5">
 
                         <div class="form-group row">
-                            <label for="col-name" class="col-sm-3">Target Column</label>
-                            <input class="form-control col-sm-4" type="text" name="col_name"
+                            <label for="col-name" class="col-5">Target Column</label>
+                            <input class="form-control col-4" type="text" name="col_name"
                                 value="{{ cell.data.col_name }}" placeholder="" required>
                         </div>
 
                         <div class="form-group row">
-                            <label for="new-varname" class="col-sm-3">New Variable Name</label>
-                            <input class="form-control col-sm-4" type="text" name="new_varname" placeholder=""
+                            <label for="new-varname" class="col-5">New Variable</label>
+                            <input class="form-control col-4" type="text" name="new_varname" placeholder=""
                                 value="{{ cell.data.new_varname }}" required>
                         </div>
 
-
-                    </div>
-                    <div class="col-4">
                         <div class="row">
                             <input type="hidden" value="{{ cell.name }}" name="cellname">
 
-
-
-                            <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
-                                class="btn col-6 offset-4">Score model</button>
+                            <button type="submit"
+                                style=" right: 1px; bottom: 1px; background-color:#EB3F3F; color:white"
+                                class="btn col-sm-4 offset-5"><b>TRAIN</b></button>
                             <!-- <p style="color: green;">{{ cell.data.msg }}</p> -->
                         </div>
                     </div>
 
-
-
                 </div>
+
                 <div class="row">
                     <div class="col-12">
                         <label>Logs</label>
-                        <div style="background-color: white; height: 25px;">
+                        <div style="background-color: black; height: 30px;">
 
-                            <p style="color: green; margin: 1px;">{{ cell.data.msg }}</p>
+                            <b style="color: white; padding: 2px;">{{ cell.data.msg }}</b>
 
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </form>
-    <hr>
+    <hr style="border-color: white;">
 </div>

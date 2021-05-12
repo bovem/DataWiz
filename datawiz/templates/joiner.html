@@ -1,18 +1,16 @@
 <div class="cell m-2 outer-cell">
     <form action="/exec/joiner" method="POST">
         {% csrf_token %}
-    <div class="row m-2">
-        <div class="col-md-12 ">
-            <h3>Data Joiner</h3>
-            <hr>
+        <div class="row m-2">
+            <div class="col-md-12 ">
+                <h4><b>JOINER</b></h4>
+                <hr style="border-color: white;">
 
-
-
-            <div class="row">
-                <div class="col-7">
+                <div class="row">
+                    <div class="col-7">
 
                         <div class="form-group row">
-                            <label for="varname-exporter" class="col-sm-3">Variable 1 </label>
+                            <label for="varname-exporter" class="col-sm-3">Variable 1</label>
 
                             <select class="col-sm-4" name="varname" id="varname-exporter" class="input-bg">
                                 {% for var in varlist %}
@@ -39,43 +37,44 @@
                             </select>
 
                         </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group row">
+                            <label for="filename" class="col-sm-5">New Variable Name</label>
+                            <input type="text" placeholder="" value="{{ cell.data.new_varname }}" name="new_varname"
+                                class="col-sm-4">
+                        </div>
+                        <div class="form-group row">
+                            <label for="jointype" class="col-sm-5">Jointype</label>
+                            <select class="form-control col-sm-4" name="jointype">
+                                <option value="horizontal">Horizontal</option>
+                                <option value="vertical">Vertical</option>
+                            </select>
+                        </div>
+                        <div class="row">
+
+                            <input type="hidden" value="{{ cell.name }}" name="cellname">
+                            <button type="submit"
+                                style=" right: 1px; bottom: 1px; background-color:#EB3F3F; color:white"
+                                class="btn col-sm-4 offset-5"><b>JOIN</b></button>
+                        </div>
+                    </div>
+
+
+
                 </div>
-                <div class="col-5">
-                    <div class="form-group row">
-                        <label for="filename" class="col-sm-5">New Variable Name</label>
-                        <input type="text" placeholder="" value="{{ cell.data.new_varname }}" name="new_varname"
-                            class="col-sm-4">
-                    </div>
-                    <div class="form-group row">
-                        <label for="jointype" class="col-sm-5">Jointype</label>
-                        <select class="form-control col-sm-4" name="jointype">
-                            <option value="horizontal">Horizontal</option>
-                            <option value="vertical">Vertical</option>
-                        </select>
-                    </div>
-                    <div class="row">
+                <div class="row">
+                    <div class="col-12">
+                        <label>Logs</label>
+                        <div style="background-color: black; height: 30px;">
 
-                        <input type="hidden" value="{{ cell.name }}" name="cellname">
-                        <button type="submit" style=" right: 1px; bottom: 1px; background-color:orange;"
-                            class="btn offset-5 col-4">Join</button>
-                    </div>
-                </div>
+                            <b style="color: white; margin: 2px;">{{ cell.data.msg }}</b>
 
-
-
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <label>Logs</label>
-                    <div style="background-color: white; height: 25px;">
-
-                        <p style="color: green; margin: 1px;">{{ cell.data.msg }}</p>
-
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</form>
-    <hr>
+    </form>
+    <hr style="border-color: white;">
 </div>

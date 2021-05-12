@@ -1,7 +1,7 @@
 <div class="cell m-2" style="height: 550px;">
     <div class="row m-2">
         <div class="col-md-12">
-            <h3>Data Viewer</h3>
+            <h4><b>VIEWER</b></h4>
         </div>
     </div>
     <!-- <table id="table" class="table table-striped"  style="width: 100%;">
@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="vis-input col-md-12 mt-2" >
+        <div class="vis-input col-md-12 mt-2">
             <form action="/exec/viewer" method="POST">
                 {% csrf_token %}
                 <div class="row">
@@ -22,11 +22,11 @@
                             <label for="Variable" class="offset-md-1 col-md-5">Variable Name</label>
                             <select name="varname" id="" class="form-control col-md-5">
                                 {% for var in varlist %}
-                                    {% if var == cell.data.varname %}
-                                    <option value="{{ var }}" selected>{{ var }}</option>
-                                    {% else %}
-                                    <option value="{{ var }}">{{ var }} </option>
-                                    {% endif %}
+                                {% if var == cell.data.varname %}
+                                <option value="{{ var }}" selected>{{ var }}</option>
+                                {% else %}
+                                <option value="{{ var }}">{{ var }} </option>
+                                {% endif %}
                                 {% endfor %}
                             </select>
                         </div>
@@ -42,8 +42,8 @@
                         <div class="row">
                             <input type="hidden" value="{{ cell.name }}" name="cellname">
                             <button type="submit"
-                                style="  background-color:orange;"
-                                class="btn offset-3 col-md-5"> Show </button>
+                                style=" right: 1px; bottom: 1px; background-color:#EB3F3F; color:white"
+                                class="btn col-sm-4 offset-5"><b>SHOW</b></button>
                         </div>
                     </div>
                 </div>

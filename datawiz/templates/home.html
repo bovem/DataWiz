@@ -40,29 +40,31 @@
                                 </div>
 
 
-                                <div class="form-group row">
-                                    <label class="col-sm-6" for="file">Choose File</label>
-                                    <select class="col-sm-6" name="filename" id="">
-                                        {% for file in files %}
-                                        <option value="{{ file }}">{{ file }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
+
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-4 offset-2">Encoding</label>
+                                    <label class="col-sm-5 offset-1">Encoding</label>
                                     <select class="form-control col-sm-6" name="encoding">
                                         <option>utf-8</option>
                                         <option>latin</option>
                                     </select>
                                 </div>
 
+                                <div class="form-group row">
+                                    <label class="col-sm-5 offset-1" for="file">Choose File</label>
+                                    <select class="col-sm-6" name="filename" id="">
+                                        {% for file in files %}
+                                        <option value="{{ file }}">{{ file }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
                                 <div class="row">
                                     <button type="submit"
-                                        style=" right: 1px; bottom: 1px; background-color:#EB3F3F; color: white; margin-top: 16%;"
-                                        class="btn col-sm-6 offset-6"><b>Load Dataset</b></button>
+                                        style=" right: 1px; bottom: 1px; background-color:#EB3F3F; color: white;"
+                                        class="btn col-sm-6 offset-6"><b>LOAD</b></button>
                                 </div>
                             </div>
 
@@ -76,7 +78,7 @@
                     <label>Logs</label>
                     <div style="background-color: black; height: 30px;">
 
-                        <p style="color: green; margin: 1px;">{{ loaderMsg }}</p>
+                        <b style="color: white; padding: 2px;">{{ loaderMsg }}</b>
 
                     </div>
                 </div>
