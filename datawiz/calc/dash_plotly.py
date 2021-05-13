@@ -31,12 +31,12 @@ axis_variable = dbc.Row(
                     dbc.Label("X Variable"),
                     dcc.Dropdown(
                         id='x-axis',
-                        options=[],
+                        options=[]
                         # value="x-axis"
                     ),
                 ]
             ),
-            md=10
+            #md=10
         ),
         dbc.Col(
             dbc.FormGroup(
@@ -44,12 +44,12 @@ axis_variable = dbc.Row(
                     dbc.Label("Y Variable"),
                     dcc.Dropdown(
                         id='y-axis',
-                        options=[],
+                        options=[]
                         # value="x-axis"
                     ),
                 ]
             ),
-            md=10
+            #md=10
         )
     ]
 )
@@ -77,18 +77,17 @@ axis_label = dbc.Row(
     ]
 )
 
-input_varname = dbc.Col(
-    dbc.FormGroup(
+input_varname = dbc.FormGroup(
         [
             dbc.Label("Variable"),
             dcc.Dropdown(
                 id='varname_visualiser',
-                options=[],
+                options=[]
                 # value="x-axis"
             ),
         ]
-    ), md=6
-)
+    )
+
 
 input_title = dbc.Row(dbc.Col(
     dbc.FormGroup(
@@ -99,40 +98,41 @@ input_title = dbc.Row(dbc.Col(
     )
 ))
 
-plot_types = dbc.Row([
+plot_types = dbc.Row([dbc.Col([
     input_varname,
-    dbc.Col(
-        dbc.FormGroup(
+    dbc.FormGroup(
             [
                 dbc.Label("Plot-type"),
                 dcc.Dropdown(
                     id='plot-type',
                     options=[
                         {"label": plot, "value": plot} for plot in plot_list
-                    ],
+                    ]
                     # value="x-axis"
                 ),
             ]
-        ),
-        md=6
-    )]
-)
+        )
+    ])])
 
 controls = dbc.Card(
     [
         plot_types,
         axis_variable,
-        input_title,
         axis_label,
+        input_title,
     ],
-    body=True
+    body=True,
+    style={'border-color':'white'}
 )
 
-app.layout = dbc.Row(
+app.layout = dbc.Col(
     [
-        dbc.Col(dcc.Graph(id="vis-graph"), md=8),
-        dbc.Col(controls, md=4),
-    ]
+        dbc.Row(
+    [
+        dbc.Col(dcc.Graph(id="vis-graph")),
+        dbc.Col(controls)
+    ])
+    ],
 )
 
 

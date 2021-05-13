@@ -1,1 +1,1 @@
-[]
+[{"type": "cleaner.html", "name": "cleaner-0", "data": {"varname": "housing", "new_varname": "housing_clean"}}, {"type": "regressor.html", "name": "regressor-0", "data": {"varname": "housing_clean", "new_varname": "reg", "col_name": "median_house_value"}}]
