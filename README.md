@@ -5,7 +5,7 @@
 A GUI application to perform tasks such as data cleaning, data engineering and machine learning without writing any code.
 It is a data prototyping tool for students and researchers to do prelimnary analysis of their dataset.
 
-## Featues
+## Features
 * Data Imports in CSV, JSON, XLSX and HTML format.
 * Null Values imputation with Fill Forward, Fill Backward, Fill Median, Fill Mean and Drop.
 * Preprocessors like Label Encoding, Normalizer and Standardizer.
@@ -65,3 +65,5 @@ chmod +x ./executor.sh
 ```
 ./executor.sh
 ```
+## License
+[MIT](LICENSE)
